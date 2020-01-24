@@ -1,0 +1,26 @@
+
+*** These modified files were found in JOE when it aborted on Fri Jan 24 11:59:39 2020
+*** JOE was aborted because the terminal closed
+
+*** File '* Build Log *'
+/bin/sh: -c: line 2: syntax error near unexpected token `)'
+/bin/sh: -c: line 2: `" && if (); then echo "'
+
+
+
+*** File '(Unnamed)'
+:wq
+
+*** File '(Unnamed)'
+/home/botan008/csci2041/hw1/.git/MERGE_MSG
+/home/botan008/csci2041/hw8/.git/MERGE_MSG
+* Build Log *
+/home/botan008/csci2041/hw7/.git/MERGE_MSG
+/home/botan008/Spring20/csci3081w/repo-botan008/.git/MERGE_MSG
+* Build Log *
+
+*** File '* Startup Log *'
+Processing '/etc/joe/editorrc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/editorrc
