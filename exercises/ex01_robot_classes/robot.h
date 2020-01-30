@@ -3,11 +3,30 @@
 
 class Robot {
   public:
+    // Robot();
+    // Robot(int x, int y);
+    // Robot(float theta);
+    // Robot(int x, int y, float theta);
+    Robot(int x=0, int y=0, float theta=0);
+    
     void MoveForward( int distance );
     void Display();
+    //setters and getters
+    void set_position( int x, int y);
+    int* get_position();
+    void set_direction_angle_rad(float d);
+    float get_direction_angle_rad();
+
+    // Now the members are not private, but all code needs updating.
+    // struct Position {
+    //   int x_;
+    //   int y_;
+    //   Position(int x=0,int y=0) : x_(x), y_(y) {} //woah, this is a constructor
+    // };
+
   private:
     float direction_angle_;
-    int position_[2];
+    int   position_[2];
   };
 
 #endif /* EX01_ROBOT_CLASSES_H_ */
