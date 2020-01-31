@@ -9,7 +9,7 @@ Point2::Point2 (float newX, float newY) {
     y = newY;
 }
 
-// 23.3178 vs 24.0122 It's not finding the pt farthest from 0,0.
+// This appears to work correctly
 float Point2::DistanceBetween(Point2 other) {
     // float distance;
     // distance = sqrt( (other.x - this.x) + (other.y - this.y) );
