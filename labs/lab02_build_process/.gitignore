@@ -1,0 +1,5 @@
+# Extentions to not include in the repo
+*.o
+*.out
+*.pvt
+ducks
