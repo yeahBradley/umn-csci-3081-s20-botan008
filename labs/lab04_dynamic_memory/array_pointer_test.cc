@@ -15,22 +15,48 @@ ArrayPointerTest::ArrayPointerTest(int count) {
   // using the 4 arrays ducks1, ducks2, ducks3, and ducks4.
   // FILL IN the code below to create these ducks.
   // Here again are the declarations of the duck arrays:
-  //     Duck ducks1_[kMaxDuckCount];
-  //     Duck * ducks2_;
-  //     Duck * ducks3_[kMaxDuckCount];
-  //     Duck ** ducks4_;
+  //     Duck ducks1_[kMaxDuckCount];  Static Array
+  //     Duck * ducks2_; A single Pointer
+  //     Duck * ducks3_[kMaxDuckCount]; An array of pointers
+  //     Duck ** ducks4_; A pointer to a pointer
 
   cout << "Initializing ducks1." << endl;
   // Write code here to create count_ ducks for array ducks1 (if required)
+  cout << "sizeof(int) is " << sizeof(int) << endl;
+  cout << "sizeof(std::string) is " << sizeof(std::string) << endl;
+  cout << "sizeof(ducks1_[0]) is " << sizeof(ducks1_[0]) << endl;
+  cout << "sizeof(ducks1_) is " << sizeof(ducks1_) << endl;
 
   cout << "Initializing ducks2\n" ;
   // Write code here to create count_ ducks for array ducks2 (if required)
+  ducks2_ = new Duck[count_];
+  cout << "sizeof(ducks2_) is " << sizeof(ducks2_) << endl;
 
   cout << "Initializing ducks3\n";
   // Write code here to create count_ ducks for array ducks3 (if required)
+  for (int i = 0; i < count_; i++) {
+    ducks3_[i] = new Duck;
+  }
+  cout << "sizeof(ducks3_) is " << sizeof(ducks3_) << endl;
 
   cout << "Initializing ducks4\n";
   // Write code here to create count_ ducks for array ducks4 (if required)
+  //Duck *ducks4_alt[kMaxDuckCount]; //is an array of pointers on the stack
+  //ducks4_alt = new Duck[count_];
+  // for (int i  = 0; i < count_; i++) {
+  //   ducks4_alt[i] = new Duck;
+  // }
+  // ducks4_ = &ducks4_alt[0];
+  
+  
+
+  ducks4_ = new Duck*[count_];
+  for (int i = 0; i < count_; i++) {
+    ducks4_[i] = new Duck;
+  }
+  
+
+  cout << "sizeof(ducks4_) is " << sizeof(ducks4_) << endl;
 }
 
 void ArrayPointerTest::NameTheDucks(int array_number) {
@@ -51,16 +77,40 @@ void ArrayPointerTest::NameTheDucks(int array_number) {
     case 2:
       cout << "Naming ducks2\n";
       // Write code here to name count_ ducks in ducks2 and set array_number_.
+      for (int i = 0; i < count_; i++) {
+        //ducks2_[i].set_name(names[i]);
+         (ducks2_ + i)->set_name(names[i]);
+        //ducks2_[i].set_number(i);
+         (ducks2_ + i)->set_number(2);
+      }
       break;
 
     case 3:
       cout << "Naming ducks3\n";
       // Write code here to name count_ ducks in ducks3 and set array_number_.
+      for (int i = 0; i < count_; i++) {
+        ducks3_[i]->set_name(names[i]);
+        ducks3_[i]->set_number(3);
+      }
       break;
 
     case 4:
       cout << "Naming ducks4\n";
       // Write code here to name count_ ducks in ducks4 and set array_number_.
+      for (int i = 0; i < count_; i++) {
+        //(*ducks4_)[i].set_name(names[i]);
+        ducks4_[i]->set_name(names[i]);
+        //cout << ducks4_ << endl;
+        //cout << &ducks4_alt << endl;
+        ///((*ducks4_) + i)->set_name(names[i]);
+        //*(ducks4_ + i)->set_name(names[i]);
+        //(*ducks4_ + i)->set_name(names[i]);
+        //(*ducks4_)[i].set_number(4);
+        //*(ducks4_ + i)->set_number(4);
+        ducks4_[i]->set_number(4);
+        ///((*ducks4_) + i)->set_number(4);
+        //(*ducks4_ + i)->set_number(4);
+      }
       break;
 
     default:
@@ -80,15 +130,25 @@ ArrayPointerTest::~ArrayPointerTest() {
 
   cout << "Deleting ducks1\n";
   // Write code here to delete the ducks of ducks1_ (if required)
+  // How do I invoke the destructor here instead of when it goes out of scope?
+  //delete ducks1_;
 
   cout << "Deleting ducks2\n";
   // Write code here to delete the ducks of ducks2_ (if required)
+  delete [] ducks2_;
 
   cout << "Deleting ducks3\n";
   // Write code here to delete the ducks of ducks2_ (if required)
+  for (int i = 0; i < count_; i++) {
+    delete ducks3_[i];
+  }
 
   cout << "Deleting ducks4\n";
   // Write code here to delete the ducks of ducks2_ (if required)
+  for (int i = 0; i < count_; i++) {
+    delete ducks4_[i];
+  }
+  delete [] ducks4_;
 }
 
 
@@ -99,20 +159,20 @@ void ArrayPointerTest::DisplayContents() {
   for (int i=0; i<count_; i++) {
     ducks1_[i].PerformQuack();
   }
-  /*
+  
   cout << "ducks2" << endl;
   for (int i=0; i<count_; i++) {
     ducks2_[i].PerformQuack();
   }
-
+  
   cout << "ducks3" << endl;
   for (int i=0; i<count_; i++) {
     ducks3_[i]->PerformQuack();
   }
-
+  
   cout << "ducks4" << endl;
   for (int i=0; i<count_; i++) {
     ducks4_[i]->PerformQuack();
   }
-  */
+  
 }

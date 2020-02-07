@@ -17,6 +17,7 @@ void Helper() {
 }
 
 int main(void) {
+  //cout << "sizeof(duck) is " << sizeof(duck);
   Helper();
   return 0;
 }
