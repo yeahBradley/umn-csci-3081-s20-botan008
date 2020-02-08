@@ -14,6 +14,7 @@ Ground::Ground(std::string package) : Delivery(package) {
   std::cout << "Creating a ground package." << std::endl;
   //IncrementCount();
   set_days(5);
+  //days_to_deliver_=5;
 }
 
 Ground::~Ground() {
