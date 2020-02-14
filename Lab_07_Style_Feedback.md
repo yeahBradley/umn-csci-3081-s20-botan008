@@ -1,6 +1,6 @@
 ### Style Feedback for Lab 07
 
-Run on February 14, 14:24:21 PM.
+Run on February 14, 15:54:11 PM.
 
 
 #### Necessary Files and Structure
@@ -13,39 +13,44 @@ Run on February 14, 14:24:21 PM.
 
 + Pass: Change into directory "labs/lab07_style_doxy".
 
-+ Fail: Check that directory "docs" exists.
++ Pass: Check that directory "docs" exists.
 
-     "docs" not found.
-
-+ Skip: Check that file "docs/Doxyfile" exists.
-
-  This test was not run because of an earlier failing test.
++ Pass: Check that file "docs/Doxyfile" exists.
 
 
 #### .gitignore configured properly
 
-+ Skip: Check that file/directory "html" does not exist.
++ Pass: Check that file/directory "html" does not exist.
 
-  This test was not run because of an earlier failing test.
-
-+ Skip: Check that file/directory "latex" does not exist.
-
-  This test was not run because of an earlier failing test.
++ Pass: Check that file/directory "latex" does not exist.
 
 
 #### Google Style Compliance
 
-+ Fail: Check that file "src/mainpage.h" exists.
++ Pass: Check that file "src/mainpage.h" exists.
 
-     "src/mainpage.h" not found.
++ Pass: Ignoring mainpage.h
 
-+ Skip: Ignoring mainpage.h
 
-  This test was not run because of an earlier failing test.
 
-+ Skip: Cpplint checking for for Google C++ compliance
++ Fail: Cpplint checking for for Google C++ compliance
 
-  This test was not run because of an earlier failing test.
+/export/scratch/cpplint-sherv029/./src/passenger.cc:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
+/export/scratch/cpplint-sherv029/./src/passenger.cc:1:  Include the directory when naming .h files  [build/include] [4]
+/export/scratch/cpplint-sherv029/./src/passenger.cc:9:  Should have a space between // and comment  [whitespace/comments] [4]
+/export/scratch/cpplint-sherv029/./src/passenger.cc:10:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+/export/scratch/cpplint-sherv029/./src/passenger_factory.cc:58:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
+/export/scratch/cpplint-sherv029/./src/passenger_factory.cc:61:  Should have a space between // and comment  [whitespace/comments] [4]
+/export/scratch/cpplint-sherv029/./src/passenger_factory.cc:71:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+/export/scratch/cpplint-sherv029/./src/passenger_factory.cc:71:  Extra space before ( in function call  [whitespace/parens] [4]
+/export/scratch/cpplint-sherv029/./src/passenger.h:7:  #ifndef header guard has wrong style, please use: SRC_PASSENGER_H_  [build/header_guard] [5]
+/export/scratch/cpplint-sherv029/./src/passenger.h:77:  #endif line should be "#endif  // SRC_PASSENGER_H_"  [build/header_guard] [5]
+/export/scratch/cpplint-sherv029/./src/passenger.h:24:  At least two spaces is best between code and comments  [whitespace/comments] [2]
+/export/scratch/cpplint-sherv029/./src/passenger.h:32:  Constructors callable with one argument should be marked explicit.  [runtime/explicit] [5]
+/export/scratch/cpplint-sherv029/./src/passenger.h:63:  "private:" should be preceded by a blank line  [whitespace/blank_line] [3]
+/export/scratch/cpplint-sherv029/./src/passenger.h:75:  Line ends in whitespace.  Consider deleting these extra spaces.  [whitespace/end_of_line] [4]
+/export/scratch/cpplint-sherv029/./src/passenger.h:75:  Redundant blank line at the end of a code block should be deleted.  [whitespace/blank_line] [3]
+/export/scratch/cpplint-sherv029/./src/passenger.h:77:  Could not find a newline character at the end of the file.  [whitespace/ending_newline] [5]
 
 + Skip: Getting mainpage.h back
 
@@ -54,19 +59,11 @@ Run on February 14, 14:24:21 PM.
 
 #### Doxygen
 
-+ Fail: Change into directory "docs".
++ Pass: Change into directory "docs".
 
-     Directory "docs" not found.
++ Pass: Generating documentation by running doxygen
 
-+ Skip: Generating documentation by running doxygen
++ Pass: Check that file "html/classPassenger.html" exists.
 
-  This test was not run because of an earlier failing test.
-
-+ Skip: Check that file "html/classPassenger.html" exists.
-
-  This test was not run because of an earlier failing test.
-
-+ Skip: Check that file "html/classPassengerFactory.html" exists.
-
-  This test was not run because of an earlier failing test.
++ Pass: Check that file "html/classPassengerFactory.html" exists.
 
