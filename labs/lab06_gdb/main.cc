@@ -44,7 +44,7 @@ void doInterestingThing(int yr) {
 
   // now show the dates accumulated in reverse order
   for (int i = 0; i < *array_len; i++) {
-    cout << "date is: " << birthday_list[i]->show() << endl;
+    cout << "date is: " << birthday_list[*array_len-1-i]->show() << endl;
   }
 
   // now set the dates to January 2
