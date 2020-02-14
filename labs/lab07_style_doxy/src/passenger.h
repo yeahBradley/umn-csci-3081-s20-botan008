@@ -31,18 +31,38 @@ class Passenger { // : public Reporter {
   */
   Passenger(int = -1, std::string = "Nobody");
   /**
-   * @brief Update function
+   * @brief Update() method
    * 
    */
   void Update();
+  /**
+   * @brief GetonBus() method
+   * 
+   */
   void GetOnBus();
+  /**
+   * @brief GetTotalWait() const method
+   * 
+   */
   int GetTotalWait() const;
+  /**
+   * @brief IsOnBus() const method
+   * 
+   */
   bool IsOnBus() const;
+  /**
+   * @brief GetDestination() const method
+   * 
+   */
   int GetDestination() const;
+  /**
+   * @brief Report() const method
+   * 
+   */
   void Report() const;
  private:
  /**
-  * @brief private
+  * @brief private member variables
   * 
   * 
   */
