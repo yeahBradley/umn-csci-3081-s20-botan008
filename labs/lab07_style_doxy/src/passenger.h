@@ -4,8 +4,8 @@
  * @copyright 2019 3081 Staff, All rights reserved.
  */
 
-#ifndef PASSENGER_H
-#define PASSENGER_H
+#ifndef SRC_PASSENGER_H_
+#define SRC_PASSENGER_H_
 
 /*******************************************************************************
  * Includes
@@ -21,15 +21,15 @@
  * 
  * 
  */
-class Passenger { // : public Reporter {
+class Passenger {  // : public Reporter {
  public:
  /**
   * @brief Constructor Passenger()
   * 
-  * Methods: Update(), GetOnBus(), GetTotalWait(), 
+  * The explicit keyword prevents implicity type conversions.
   * 
   */
-  Passenger(int = -1, std::string = "Nobody");
+  explicit Passenger(int = -1, std::string = "Nobody");
   /**
    * @brief Update() method
    * 
@@ -60,6 +60,7 @@ class Passenger { // : public Reporter {
    * 
    */
   void Report() const;
+
  private:
  /**
   * @brief private member variables
@@ -72,6 +73,5 @@ class Passenger { // : public Reporter {
   int time_on_bus_;
   int id_;
   static int count_;  // global count, used to set ID for new instances
-  
 };
-#endif
+#endif  // SRC_PASSENGER_H_
