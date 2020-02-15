@@ -1,6 +1,6 @@
 ### Style Feedback for Lab 07
 
-Run on February 14, 20:25:10 PM.
+Run on February 14, 21:59:21 PM.
 
 
 #### Necessary Files and Structure
@@ -35,14 +35,14 @@ Run on February 14, 20:25:10 PM.
 
 + Fail: Cpplint checking for for Google C++ compliance
 
-/export/scratch/cpplint-sherv029/./src/passenger.cc:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
-/export/scratch/cpplint-sherv029/./src/passenger.cc:1:  Include the directory when naming .h files  [build/include] [4]
-/export/scratch/cpplint-sherv029/./src/passenger.cc:9:  Should have a space between // and comment  [whitespace/comments] [4]
-/export/scratch/cpplint-sherv029/./src/passenger.cc:10:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
 /export/scratch/cpplint-sherv029/./src/passenger_factory.cc:58:  Redundant blank line at the start of a code block should be deleted.  [whitespace/blank_line] [2]
 /export/scratch/cpplint-sherv029/./src/passenger_factory.cc:61:  Should have a space between // and comment  [whitespace/comments] [4]
 /export/scratch/cpplint-sherv029/./src/passenger_factory.cc:71:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
 /export/scratch/cpplint-sherv029/./src/passenger_factory.cc:71:  Extra space before ( in function call  [whitespace/parens] [4]
+/export/scratch/cpplint-sherv029/./src/passenger.cc:0:  No copyright message found.  You should have a line: "Copyright [year] <Copyright Owner>"  [legal/copyright] [5]
+/export/scratch/cpplint-sherv029/./src/passenger.cc:1:  Include the directory when naming .h files  [build/include] [4]
+/export/scratch/cpplint-sherv029/./src/passenger.cc:9:  Should have a space between // and comment  [whitespace/comments] [4]
+/export/scratch/cpplint-sherv029/./src/passenger.cc:10:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
 /export/scratch/cpplint-sherv029/./src/passenger.h:7:  #ifndef header guard has wrong style, please use: SRC_PASSENGER_H_  [build/header_guard] [5]
 /export/scratch/cpplint-sherv029/./src/passenger.h:77:  #endif line should be "#endif  // SRC_PASSENGER_H_"  [build/header_guard] [5]
 /export/scratch/cpplint-sherv029/./src/passenger.h:24:  At least two spaces is best between code and comments  [whitespace/comments] [2]
