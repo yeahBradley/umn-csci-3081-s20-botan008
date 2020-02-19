@@ -1,6 +1,6 @@
 ### Basic Feedback for Lab 08
 
-Run on February 19, 04:30:15 AM.
+Run on February 19, 08:00:57 AM.
 
 
 #### System Files and Lab Directory Structure
