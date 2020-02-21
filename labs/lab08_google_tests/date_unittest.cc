@@ -163,7 +163,90 @@ TEST_F(DateTest, GetUsDateTest) {
   EXPECT_EQ(output3, expected_out_3);
 }
 
+// This method is failure. 
+// TODO:: Include leap year tests
+TEST_F(DateTest, DaysBetweenTests) {
+  Date first_day(2018, 9, 4);          // First day of class
+  Date last_day(2018, 12, 11);         // Last day of class
+  int output1 = 98;
 
+  Date pre_leap(2019, 1, 1);
+  Date post_leap(2021, 1, 1);
+  int output2 = 731;
+  
+  EXPECT_EQ(output1, first_day.DaysBetween(last_day));
+  EXPECT_EQ(output1, last_day.DaysBetween(first_day));
+  EXPECT_EQ(output2, pre_leap.DaysBetween(post_leap));
+  EXPECT_EQ(output2, post_leap.DaysBetween(pre_leap));
+}
+
+// ERROR: This method uses "+" instead of "-"
+TEST_F(DateTest, OperatorminusTests) {
+  Date first_day(2018, 9, 4);          // First day of class
+  Date last_day(2018, 12, 11);         // Last day of class
+  Date output1 = last_day - 98;
+
+  Date pre_leap(2019, 1, 1);
+  Date post_leap(2021, 1, 1);
+  Date output2 = post_leap - 731;
+
+  EXPECT_EQ(first_day.GetDate(), output1.GetDate());
+  EXPECT_EQ(pre_leap.GetDate(), output2.GetDate());
+}
+
+// This method is correct
+TEST_F(DateTest, OperatorplusTests) {
+  Date first_day(2018, 9, 4);          // First day of class
+  Date last_day(2018, 12, 11);         // Last day of class
+  Date output1 = first_day + 98;
+
+  Date pre_leap(2019, 1, 1);
+  Date post_leap(2021, 1, 1);
+  Date output2 = pre_leap + 731;
+  
+  EXPECT_EQ(last_day.GetDate(), output1.GetDate());
+  EXPECT_EQ(post_leap.GetDate(), output2.GetDate());
+}
+
+TEST_F(DateTest, ConstructorEpochTests) {
+  Date epoch_zero(0); // 1970-1-1
+  Date epoch_input(1970, 1, 1);
+
+  EXPECT_EQ(epoch_zero.GetDate(), epoch_input.GetDate());
+}
+
+// ERROR: Default Constructor stores the wrong month
+TEST_F(DateTest, ConstructerDefaultTests) {
+  Date test1;
+  Date test2;
+  Date test3(2020, 2, 21);
+  
+  int yyyy_, mm_, dd_;
+  std::time_t t = std::time(0);
+  std::tm* now = std::localtime(&t);
+  
+  //tm year's value is years since 1900
+  yyyy_ = now->tm_year + 1900;
+  //tm month's value is zero-indexed
+  mm_ = now->tm_mon + 1;
+  //tm day's value is one-indexed
+  dd_ = now->tm_mday;
+
+  Date test4(yyyy_, mm_, dd_);
+  EXPECT_EQ(test3.GetDate(), test1.GetDate());
+  EXPECT_EQ(test1.GetDate(), test2.GetDate());
+  EXPECT_EQ(test1.GetDate(), test4.GetDate());
+}
+
+// Param constructor has no range checking.
+TEST_F(DateTest, ConstructorParamTests) {
+  Date zero_day(0, 0, 0);
+  Date one_day(1, 1, 1);
+  Date neg_day(-1, -1, -1);
+
+  EXPECT_NE(zero_day.GetDate(), neg_day.GetDate());
+  EXPECT_NE(neg_day.GetDate(), one_day.GetDate()); 
+}
 /**
   *
   * Note, this is the only provided test case which actually uses our test
@@ -183,29 +266,7 @@ TEST_F(DateTest, GetUsDateTest) {
 //      << "Days between is not calculated properly";
 // }
 
-TEST_F(DateTest, DaysBetweenTests2) {
-  Date first_day(2018, 9, 4);          // First day of class
-  Date last_day(2018, 12, 11);         // Last day of class
-  int output = 98;
-  
-  EXPECT_EQ(output, first_day.DaysBetween(last_day));
-}
 
-TEST_F(DateTest, OperatorminusTests) {
-  Date first_day(2018, 9, 4);          // First day of class
-  Date last_day(2018, 12, 11);         // Last day of class
-  Date output = last_day - 98;
-
-  EXPECT_EQ(first_day.GetDate(), output.GetDate());
-}
-
-TEST_F(DateTest, OperatorplusTests) {
-  Date first_day(2018, 9, 4);          // First day of class
-  Date last_day(2018, 12, 11);         // Last day of class
-  Date output = first_day + 98;
-  
-  EXPECT_EQ(last_day.GetDate(), output.GetDate());
-}
 
 /**
   *
