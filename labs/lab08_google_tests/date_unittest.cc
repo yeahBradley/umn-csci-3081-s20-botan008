@@ -164,7 +164,6 @@ TEST_F(DateTest, GetUsDateTest) {
 }
 
 // This method is failure. 
-// TODO:: Include leap year tests
 TEST_F(DateTest, DaysBetweenTests) {
   Date first_day(2018, 9, 4);          // First day of class
   Date last_day(2018, 12, 11);         // Last day of class
@@ -207,7 +206,7 @@ TEST_F(DateTest, OperatorplusTests) {
   EXPECT_EQ(last_day.GetDate(), output1.GetDate());
   EXPECT_EQ(post_leap.GetDate(), output2.GetDate());
 }
-
+// ERROR: 
 TEST_F(DateTest, ConstructorEpochTests) {
   Date epoch_zero(0); // 1970-1-1
   Date epoch_input(1970, 1, 1);
