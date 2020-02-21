@@ -26,7 +26,9 @@ class Date {
 
   /**
     * Constructor
-    * param [in] epoch: an approximation of the number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970
+    * param [in] epoch: an approximation of the number of seconds that have
+    * elapsed since 00:00:00 Coordinated Universal Time (UTC), Thursday, 1
+    * January 1970
     *
     * Converts epoch time given to this Date format and stored.
     **/
@@ -35,14 +37,16 @@ class Date {
   /**
     * Adding days to the date.
     * param [in] rhs: right hand side of this+rhs
-    * param [out] New Date object representing the date which is "days" number of days after the date currently stored
+    * param [out] New Date object representing the date which is "days" number
+    * of days after the date currently stored
     **/
   Date operator+(int days) const;
 
   /**
     * Subtracting days from the date.
     * param [in] rhs: right hand side of this+rhs
-    * param [out] New Date object representing the date which is "days" number of days before the date currently stored
+    * param [out] New Date object representing the date which is "days" number
+    * of days before the date currently stored
     **/
   Date operator-(int days) const;
   
