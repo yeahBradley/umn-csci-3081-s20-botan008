@@ -1,6 +1,6 @@
 ### Fuller Feedback for Lab 08
 
-Run on February 22, 17:21:13 PM.
+Run on February 22, 19:07:33 PM.
 
 
 #### System Files and Lab Directory Structure
@@ -97,15 +97,8 @@ Run on February 22, 17:21:13 PM.
 
 
 
-+ Fail: Check that a GoogleTest test passes.
-    fails the test: DateTest.ConstructerDefaultTests.
-<pre>
-[ RUN      ] DateTest.ConstructerDefaultTests
-./date_unittest.cc:235: Failure
-      Expected: test3.GetDate()
-      Which is: "2020-02-21"
-To be equal to: test1.GetDate()
-      Which is: "2020-02-22"</pre>
++ Pass: Check that a GoogleTest test passes.
+    passes the test: DateTest.ConstructerDefaultTests.
 
 
 
@@ -114,7 +107,7 @@ To be equal to: test1.GetDate()
 
 
 
-+ Fail: 91.67% of the tests passed, but the target is 100%.
++ Pass: 100.0% of the tests passed. Expected at least 100%.
 
 
 ### Testing Mutants
@@ -137,8 +130,7 @@ To be equal to: test1.GetDate()
 
 #### Testing Mutant 4 for failure
 
-+ Fail: There is no test case for this mutant (since all tests pass).
-   - Reason - Today's date month off by one
++ Pass: At least one test failed for Mutant 4
 
 
 #### Testing Mutant 5 for failure
