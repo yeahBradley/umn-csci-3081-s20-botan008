@@ -1,1 +1,5 @@
+# Ignore the external directory
+external
+
+# OSX automatically includes these, so ignore them as well.
 .DS_Store
