@@ -18,5 +18,3 @@ class PassengerUnloader {
   int UnloadPassengers(std::list<Passenger*>& passengers, Stop * current_stop);
 };
 #endif  // SRC_PASSENGER_UNLOADER_H_
-
-
