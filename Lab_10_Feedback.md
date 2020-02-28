@@ -1,6 +1,6 @@
 ### Feedback for Lab 10
 
-Run on February 27, 20:29:04 PM.
+Run on February 28, 12:18:45 PM.
 
 
 ### Necessary Files and Structure
@@ -20,13 +20,13 @@ Run on February 27, 20:29:04 PM.
 
 + Pass: Run git ls-remote gather all branches in repo
 
-		4ec64b89f7546607a7885ec2856d45d64313ee64	refs/heads/devel
+		f247f3fafbe17f052ef13066856aa39955f1465c	refs/heads/devel
 
 		983ed32516a2efcee1c5f0f744328f5fa03b5d8e	refs/heads/fix/01-compilation-errors
 
-		23a85d8282bb1a605ab23895f0bb9cbaef6b139d	refs/heads/fix/02-google-style-pass
+		b9fb78e181fbaf4f41873d9c13736cb67dea1a5a	refs/heads/fix/02-google-style-pass
 
-		e45f1a07d6e454f8d60c53e7b583aa3193e22aa3	refs/heads/master
+		873602a69b4e6676426d3966e6cfbaf66078189d	refs/heads/master
 
 
 
@@ -47,10 +47,16 @@ fix/02-google-style-pass
 
 + Pass: Gather commit history
 
-		[Bradley Botanel] 2020-02-27 (HEAD -> devel, origin/devel) Merge branch 'fix/02-google-style-pass' into devel Completed google style pass of .cc and .h files.
+		[Bradley Botanel] 2020-02-28 (HEAD -> devel, origin/devel) Merge branch 'fix/02-google-style-pass' into devel Final cpplint error has been corrected.
 
 
-		[Bradley Botanel] 2020-02-27 (origin/fix/02-google-style-pass, fix/02-google-style-pass) fix(.cc and .h): fix #2 google-style-pass Changed .cc and .h files to be google style compliant.
+		[Bradley Botanel] 2020-02-28 (origin/fix/02-google-style-pass, fix/02-google-style-pass) fix/02-google-style #2 Corrected the final cpplint error.
+
+
+		[Bradley Botanel] 2020-02-27 Merge branch 'fix/02-google-style-pass' into devel Completed google style pass of .cc and .h files.
+
+
+		[Bradley Botanel] 2020-02-27 fix(.cc and .h): fix #2 google-style-pass Changed .cc and .h files to be google style compliant.
 
 
 		[Bradley Botanel] 2020-02-27 Merge branch 'fix/02-google-style-pass' into devel .cc and .h files are now google code compliant via cpplint
@@ -201,7 +207,7 @@ This has been corrected. The program compiles.
 
 
 + Pass: Check git commit history
-Sufficient commits (found=32,required=4)
+Sufficient commits (found=36,required=4)
 
 
 ### Git Issue Usage
