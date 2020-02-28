@@ -26,8 +26,8 @@ class Route {
   void Update();
   void Report(std::ostream&);
   bool IsAtEnd() const;
-  
-  Stop *  PrevStop(); // Returns stop before destination stop
+
+  Stop *  PrevStop();  // Returns stop before destination stop
   void NextStop();  // Change destination_stop_ to next stop
   Stop * GetDestinationStop() const;    // Get pointer to next stop
   double GetTotalRouteDistance() const;
@@ -38,8 +38,9 @@ class Route {
   std::list<Stop *> GetStops() const { return stops_; }
   void UpdateRouteData();
   RouteData GetRouteData() const;
+
  private:
-  int GenerateNewPassengers();       // generates passengers on its route
+  int GenerateNewPassengers();  // generates passengers on its route
   PassengerGenerator * generator_;
   std::list<Stop *> stops_;
   std::list<double> distances_between_;  // length = num_stops_ - 1
@@ -47,10 +48,8 @@ class Route {
   int num_stops_;
   int destination_stop_index_;  // always starts at zero, no init needed
   Stop * destination_stop_;
-  // double trip_time_; // derived data - total distance travelled on route
+  // double trip_time_;  // derived data - total distance travelled on route
 
   RouteData route_data_;
-
 };
 #endif  // SRC_ROUTE_H_
-
