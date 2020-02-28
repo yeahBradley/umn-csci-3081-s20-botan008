@@ -220,3 +220,5 @@ To trigger a feedback regeneration for this lab, you must modify a (any) file in
 The feedback server looks for changes in that folder and only regenerates if something within it has changed. Since the work for this lab will be done in `/project`, it will not regenerate automatically when you change files in that directory.
 
 I would recommend that you just make a trivial change to the this file (e.g. add a word) to trigger the feedback regeneration!
+
+(change so that the auto-grader will run)
