@@ -30,15 +30,15 @@
 
 using namespace std;
 
-/******************************************************
+/*******************************************************************************
 * TEST FEATURE SetUp
-*******************************************************/
+*******************************************************************************/
 class PassengerTests : public ::testing::Test {
 protected:
   PassengerLoader* pass_loader;
   PassengerUnloader* pass_unloader;
   Passenger *passenger, *passenger1, *passenger2;
-    
+
   virtual void SetUp() {
     pass_loader = new PassengerLoader();
     pass_unloader = new PassengerUnloader();
@@ -64,5 +64,3 @@ TEST_F(PassengerTests, Constructor) {
   passenger->GetOnBus();
   EXPECT_EQ(passenger->IsOnBus(), true);
 };
-
-
