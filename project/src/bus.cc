@@ -29,7 +29,6 @@ bool Bus::IsTripComplete() {
   return is_complete;
 }
 
-
 bool Bus::LoadPassenger(Passenger * new_passenger) {
   bool added_passenger = false;
   if (loader_->LoadPassenger(new_passenger, passenger_max_capacity_,
@@ -39,7 +38,6 @@ bool Bus::LoadPassenger(Passenger * new_passenger) {
   }
   return added_passenger;
 }
-
 
 bool Bus::Move() {
   // update all passengers FIRST
@@ -137,7 +135,6 @@ bool Bus::Move() {
   return did_move;
 }
 
-
 // bool Refuel() {
 // //This may become more complex in the future
 // fuel_ = max_fuel_;
@@ -164,7 +161,6 @@ int Bus::UnloadPassengers() {
   unloader_->UnloadPassengers(&passengers_, next_stop_);
   return passengers_unloaded;
 }
-
 
 void Bus::UpdateBusData() {
     bus_data_.id = name_;

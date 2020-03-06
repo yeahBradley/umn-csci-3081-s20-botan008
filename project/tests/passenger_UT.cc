@@ -21,7 +21,6 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include <string>
 
 #include "../src/passenger_loader.h"
 #include "../src/passenger_unloader.h"
@@ -56,11 +55,103 @@ protected:
 
 
 /*******************************************************************************
- * Test Cases
+ * Test Cases: All public methods
  ******************************************************************************/
-TEST_F(PassengerTests, Constructor) {
+TEST_F(PassengerTests, Constructor_default) { //get destination is the only getter
+  passenger = new Passenger();
+  EXPECT_EQ(passenger->GetDestination(), -1);
+
+  testing::internal::CaptureStdout();
+  passenger->Report(cout);
+  string output1 = testing::internal::GetCapturedStdout();
+
+  string expected_output1_name_ = "Name: Nobody";
+  string expected_output1_destination_stop_id_ = "Destination: -1";
+  EXPECT_GE(output1.find(expected_output1_name_), 0);
+  EXPECT_GE(output1.find(expected_output1_destination_stop_id_), 0);
+}
+
+TEST_F(PassengerTests, Constructor_params) { //get destination is the only getter
+  passenger = new Passenger(1, "Bradley");
+  EXPECT_EQ(passenger->GetDestination(), 1);
+
+  testing::internal::CaptureStdout();
+  passenger->Report(cout);
+  string output1 = testing::internal::GetCapturedStdout();
+
+  string expected_output1_name_ = "Name: Bradley";
+  string expected_output1_destination_stop_id_ = "Destination: 1";
+  EXPECT_GE(output1.find(expected_output1_name_), 0);
+  EXPECT_GE(output1.find(expected_output1_destination_stop_id_), 0);
+}
+
+TEST_F(PassengerTests, Update_OnBus) {
+  passenger = new Passenger();
+  EXPECT_EQ(passenger->GetTotalWait(), 0);
+  passenger->GetOnBus();
+  EXPECT_EQ(passenger->IsOnBus(), true);
+  EXPECT_EQ(passenger->GetTotalWait(), 1);
+  passenger->Update();
+  EXPECT_EQ(passenger->GetTotalWait(), 2);
+  passenger->Update();
+  EXPECT_EQ(passenger->GetTotalWait(), 3);
+}
+
+TEST_F(PassengerTests, Update_OffBus) {
+  passenger = new Passenger();
+  EXPECT_EQ(passenger->GetTotalWait(), 0);
+  passenger->Update();
+  EXPECT_EQ(passenger->GetTotalWait(), 1);
+  passenger->Update();
+  EXPECT_EQ(passenger->GetTotalWait(), 2);
+}
+
+TEST_F(PassengerTests, GetOnBus) {
   passenger = new Passenger();
   EXPECT_EQ(passenger->IsOnBus(), false);
   passenger->GetOnBus();
   EXPECT_EQ(passenger->IsOnBus(), true);
-};
+}
+
+TEST_F(PassengerTests, GetTotalWait) {
+  passenger = new Passenger();
+  EXPECT_EQ(passenger->GetTotalWait(), 0);
+  passenger->GetOnBus();
+  EXPECT_EQ(passenger->GetTotalWait(), 1);
+}
+
+TEST_F(PassengerTests, IsOnBus) {
+  passenger = new Passenger();
+  EXPECT_EQ(passenger->IsOnBus(), false);
+  passenger->GetOnBus();
+  EXPECT_EQ(passenger->IsOnBus(), true);
+}
+
+TEST_F(PassengerTests, GetDestination) {
+  passenger = new Passenger();
+  EXPECT_EQ(passenger->GetDestination(), -1);
+  passenger1 = new Passenger(1, "Bradley");
+  EXPECT_EQ(passenger1->GetDestination(), 1);
+
+  EXPECT_NE(passenger->GetDestination(), passenger1->GetDestination());
+}
+
+TEST_F(PassengerTests, Report) {
+  passenger = new Passenger(1, "Bradley");
+
+  testing::internal::CaptureStdout();
+  passenger->Report(cout);
+  string output1 = testing::internal::GetCapturedStdout();
+
+  string expected_output1_name_ = "Name: Bradley";
+  string expected_output1_destination_stop_id_ = "Destination: 1";
+  string expected_output1_totalWait = "Total Wait: 0";
+  string expected_output1_wait_at_stop_ = "\tWait at Stop: 0";
+  string expected_output1_time_on_bus_ = "\tTime on bus: 0";
+
+  EXPECT_GE(output1.find(expected_output1_name_), 0);
+  EXPECT_GE(output1.find(expected_output1_destination_stop_id_), 0);
+  EXPECT_GE(output1.find(expected_output1_totalWait), 0);
+  EXPECT_GE(output1.find(expected_output1_wait_at_stop_), 0);
+  EXPECT_GE(output1.find(expected_output1_time_on_bus_), 0);
+}
