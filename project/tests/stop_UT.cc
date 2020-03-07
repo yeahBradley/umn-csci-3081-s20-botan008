@@ -15,6 +15,7 @@
 #include "../src/random_passenger_generator.h"
 
 using namespace std;
+
 /*******************************************************************************
  * TEST FEATURE SetUp
  ******************************************************************************/
@@ -59,21 +60,21 @@ TEST_F(StopTests, Constructor_default) {
   EXPECT_EQ(stop1->GetLatitude(), -93.235365);
   delete stop1;
 }
-TEST_F(StopTests, LoadPassengers) {
-  cout << "TODO: EC" << endl;
-}
-TEST_F(StopTests, AddPassengers) {
-  cout << "TODO: EC" << endl;
-}
-TEST_F(StopTests, Update) {
-  cout << "TODO: EC" << endl;
-}
-TEST_F(StopTests, GetId) {
-  cout << "TODO: EC" << endl;
-}
-TEST_F(StopTests, Report) {
-  cout << "TODO: EC" << endl;
-}
+// TEST_F(StopTests, LoadPassengers_EC) {
+//   cout << "TODO: Extra Credit" << endl;
+// }
+// TEST_F(StopTests, AddPassengers_EC) {
+//   cout << "TODO: Extra Credit" << endl;
+// }
+// TEST_F(StopTests, Update_EC) {
+//   cout << "TODO: Extra Credit" << endl;
+// }
+// TEST_F(StopTests, GetId_EC) {
+//   cout << "TODO: Extra Credit" << endl;
+// }
+// TEST_F(StopTests, Report_EC) {
+//   cout << "TODO: Extra Credit" << endl;
+// }
 // int LoadPassengers(Bus *);
 // int AddPassengers(Passenger *);
 // void Update();

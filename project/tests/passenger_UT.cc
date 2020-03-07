@@ -53,7 +53,6 @@ protected:
   }
 };
 
-
 /*******************************************************************************
  * Test Cases: All public methods
  ******************************************************************************/
@@ -70,7 +69,6 @@ TEST_F(PassengerTests, Constructor_default) { //get destination is the only gett
   EXPECT_GE(output1.find(expected_output1_name_), 0);
   EXPECT_GE(output1.find(expected_output1_destination_stop_id_), 0);
 }
-
 TEST_F(PassengerTests, Constructor_params) { //get destination is the only getter
   passenger = new Passenger(1, "Bradley");
   EXPECT_EQ(passenger->GetDestination(), 1);
@@ -84,7 +82,6 @@ TEST_F(PassengerTests, Constructor_params) { //get destination is the only gette
   EXPECT_GE(output1.find(expected_output1_name_), 0);
   EXPECT_GE(output1.find(expected_output1_destination_stop_id_), 0);
 }
-
 TEST_F(PassengerTests, Update_OnBus) {
   passenger = new Passenger();
   EXPECT_EQ(passenger->GetTotalWait(), 0);
@@ -96,7 +93,6 @@ TEST_F(PassengerTests, Update_OnBus) {
   passenger->Update();
   EXPECT_EQ(passenger->GetTotalWait(), 3);
 }
-
 TEST_F(PassengerTests, Update_OffBus) {
   passenger = new Passenger();
   EXPECT_EQ(passenger->GetTotalWait(), 0);
@@ -105,28 +101,24 @@ TEST_F(PassengerTests, Update_OffBus) {
   passenger->Update();
   EXPECT_EQ(passenger->GetTotalWait(), 2);
 }
-
 TEST_F(PassengerTests, GetOnBus) {
   passenger = new Passenger();
   EXPECT_EQ(passenger->IsOnBus(), false);
   passenger->GetOnBus();
   EXPECT_EQ(passenger->IsOnBus(), true);
 }
-
 TEST_F(PassengerTests, GetTotalWait) {
   passenger = new Passenger();
   EXPECT_EQ(passenger->GetTotalWait(), 0);
   passenger->GetOnBus();
   EXPECT_EQ(passenger->GetTotalWait(), 1);
 }
-
 TEST_F(PassengerTests, IsOnBus) {
   passenger = new Passenger();
   EXPECT_EQ(passenger->IsOnBus(), false);
   passenger->GetOnBus();
   EXPECT_EQ(passenger->IsOnBus(), true);
 }
-
 TEST_F(PassengerTests, GetDestination) {
   passenger = new Passenger();
   EXPECT_EQ(passenger->GetDestination(), -1);
@@ -135,7 +127,6 @@ TEST_F(PassengerTests, GetDestination) {
 
   EXPECT_NE(passenger->GetDestination(), passenger1->GetDestination());
 }
-
 TEST_F(PassengerTests, Report) {
   passenger = new Passenger(1, "Bradley");
 
