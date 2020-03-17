@@ -4,6 +4,7 @@
  * @copyright 2019 3081 Staff, All rights reserved.
  */
 #include "src/route.h"
+#include <vector>
 
 Route::Route(std::string name, Stop ** stops, double * distances, int num_stops,
                                                PassengerGenerator * generator) {
