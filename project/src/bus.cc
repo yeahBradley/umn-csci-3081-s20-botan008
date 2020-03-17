@@ -5,8 +5,8 @@
  */
 #include "src/bus.h"
 
-using namespace std;
-//static int count = 1;
+// using namespace std;
+// static int count = 1;
 
 Bus::Bus(std::string name, Route * out, Route * in,
                          int capacity, double speed) {
@@ -32,10 +32,11 @@ bool Bus::IsTripComplete() {
   return is_complete;
 }
 
+// Previously returned an int. Changed to return a bool.
 bool Bus::LoadPassenger(Passenger * new_passenger) {
   bool added_passenger = false;
   if (loader_->LoadPassenger(new_passenger, passenger_max_capacity_,
-      &passengers_) > 0) {
+      &passengers_) == true) {
     added_passenger = true;
     // revenue_ += 0; //No revenue tracking at this time.
   }
@@ -47,7 +48,7 @@ bool Bus::LoadPassenger(Passenger * new_passenger) {
 // A bus can be between stops or at a stop. (2 states for move)
 // If it's between stops, then CanMove() returns true
 bool Bus::Move() {
-  //cout << count++ << "_Entering Bus::Move()" << endl;
+  // cout << count++ << "_Entering Bus::Move()" << endl;
 
   // update all passengers FIRST
   // new passengers will get "updated" when getting on the bus
@@ -63,9 +64,9 @@ bool Bus::Move() {
 
 
   if (speed_ > 0) {
-    //cout << distance_remaining_ << " -= " << speed_ << " becomes ";
+    // cout << distance_remaining_ << " -= " << speed_ << " becomes ";
     distance_remaining_ -= speed_;
-    //cout << distance_remaining_ << endl;
+    // cout << distance_remaining_ << endl;
   } else {
     did_move = false;
   }
@@ -76,7 +77,7 @@ bool Bus::Move() {
   // (OFF BY ONE ERROR ISSUE - do we unload if exactly zero after a move?
   // or only if there was time remaining?)
 
-  //cout << "true, false? " << distance_remaining_ << " <= 0 " << endl;
+  // cout << "true, false? " << distance_remaining_ << " <= 0 " << endl;
   if (distance_remaining_ <= 0) {
     did_move = false;
 
@@ -103,7 +104,8 @@ bool Bus::Move() {
         current_route->NextStop();
         next_stop_ = current_route->GetDestinationStop();
         distance_remaining_ += current_route->GetNextStopDistance();
-        // cout << "Inside 3rd if and after GetNextStopDistance() " << distance_remaining_ << endl;
+        // cout << "Inside 3rd if and after GetNextStopDistance() "
+        // << distance_remaining_ << endl;
         // if (did_move == true)
         //   cout << "true";
         // else
@@ -146,15 +148,17 @@ bool Bus::Move() {
     if (current_route->IsAtEnd()) {
       next_stop_ = incoming_route_->GetDestinationStop();
       // distance_remaining_ should be reset to 0, but isn't.
-      distance_remaining_ += incoming_route_->GetNextStopDistance();  
-      //cout << "Outgoing is done. Switch to Incoming " << distance_remaining_ << endl;
+      distance_remaining_ += incoming_route_->GetNextStopDistance();
+      // cout << "Outgoing is done. Switch to Incoming "
+      // << distance_remaining_ << endl;
     } else {
       next_stop_ = current_route->GetDestinationStop();
 
       // adding here in case negative time still remains
       // // (see passengers_handled above)
       distance_remaining_ += current_route->GetNextStopDistance();
-      //cout << "Outgoing is NOT done. GetNextStopDistance() " << distance_remaining_ << endl;
+      // cout << "Outgoing is NOT done. GetNextStopDistance() "
+      // << distance_remaining_ << endl;
     }
   }
 
