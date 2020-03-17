@@ -9,3 +9,6 @@ build
 
 # Ignore ~./gitmessage
 gitmessage
+
+# Ignore 
+.vscode
