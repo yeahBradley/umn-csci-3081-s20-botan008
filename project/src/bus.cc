@@ -99,6 +99,9 @@ bool Bus::Move() {
         if (passengers_handled != 0) {
           distance_remaining_ = 0;
           did_move = true;  // We move if we have gotten passengers?
+        } else {
+          std::cout << "Bus #" << this->name_ << " skipped stop #" <<
+                                     next_stop_->GetId() << std::endl;
         }
 
         current_route->ToNextStop();
@@ -139,6 +142,9 @@ bool Bus::Move() {
     if (passengers_handled != 0) {
       distance_remaining_ = 0;
       did_move = true;
+    } else {
+      std::cout << "Bus #" << this->name_ << " skipped stop #" <<
+                                 next_stop_->GetId() << std::endl;
     }
 
     current_route->ToNextStop();

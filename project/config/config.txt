@@ -31,14 +31,14 @@ Stop Name, Long, Lat, Pass Gen Prob
 
 ROUTE, East Bound 02
 
-STOP, Blegen Hall, 44.972392, -93.243774, .15
-STOP, Transitway at Commonwealth Avenue, 44.980753, -93.180669, .05
-STOP, State Fairgrounds Lot S-108, 44.983375, -93.178810, .01
-STOP, St. Paul Student Center, 44.984630, -93.186352, 0
+STOP, Blegen Hall, 44.972392, -93.243774, .0
+STOP, Transitway at Commonwealth Avenue, 44.980753, -93.180669, .0
+STOP, State Fairgrounds Lot S-108, 44.983375, -93.178810, .0
+STOP, St. Paul Student Center, 44.984630, -93.186352, .0
 
 ROUTE, West Bound 02
 
-STOP, St. Paul Student Center, 44.984630, -93.186352, .35
-STOP, State Fairgrounds Lot S-108, 44.983703, -93.178846, .01
-STOP, Transitway at Commonwealth Avenue, 44.980663, -93.180808, .01
-STOP, Blegen Hall, 44.972638, -93.243591, 0
+STOP, St. Paul Student Center, 44.984630, -93.186352, .0
+STOP, State Fairgrounds Lot S-108, 44.983703, -93.178846, .0
+STOP, Transitway at Commonwealth Avenue, 44.980663, -93.180808, .0
+STOP, Blegen Hall, 44.972638, -93.243591, .0
