@@ -41,4 +41,4 @@ ROUTE, West Bound 02
 STOP, St. Paul Student Center, 44.984630, -93.186352, .0
 STOP, State Fairgrounds Lot S-108, 44.983703, -93.178846, .0
 STOP, Transitway at Commonwealth Avenue, 44.980663, -93.180808, .0
-STOP, Blegen Hall, 44.972638, -93.243591, .0
+STOP, Blegen Hall, 44.972638, -93.243591,  .0
