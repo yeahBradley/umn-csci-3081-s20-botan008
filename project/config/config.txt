@@ -2,7 +2,7 @@ ROUTE_GENERAL_01, Campus Connector
 
 Stop Name, Long, Lat, Pass Gen Prob
 
-ROUTE, East Bound
+ROUTE, East Bound 01
 
 STOP, Blegen Hall, 44.972392, -93.243774, .15
 STOP, Coffman, 44.973580, -93.235071, .3
@@ -13,7 +13,7 @@ STOP, State Fairgrounds Lot S-108, 44.983375, -93.178810, .01
 STOP, Buford at Gortner Avenue, 44.984540, -93.181692, .01
 STOP, St. Paul Student Center, 44.984630, -93.186352, 0
 
-ROUTE, West Bound
+ROUTE, West Bound 01
 
 STOP, St. Paul Student Center, 44.984630, -93.186352, .35
 STOP, Buford at Gortner Avenue, 44.984482, -93.181657, .05
@@ -27,14 +27,16 @@ STOP, Blegen Hall, 44.972638, -93.243591, 0
 
 ROUTE_GENERAL_02, Campus Connector Express
 
-ROUTE, East Bound
+Stop Name, Long, Lat, Pass Gen Prob
+
+ROUTE, East Bound 02
 
 STOP, Blegen Hall, 44.972392, -93.243774, .15
 STOP, Transitway at Commonwealth Avenue, 44.980753, -93.180669, .05
 STOP, State Fairgrounds Lot S-108, 44.983375, -93.178810, .01
 STOP, St. Paul Student Center, 44.984630, -93.186352, 0
 
-ROUTE, West Bound
+ROUTE, West Bound 02
 
 STOP, St. Paul Student Center, 44.984630, -93.186352, .35
 STOP, State Fairgrounds Lot S-108, 44.983703, -93.178846, .01

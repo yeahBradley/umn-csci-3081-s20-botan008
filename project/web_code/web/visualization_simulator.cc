@@ -15,6 +15,17 @@ VisualizationSimulator::~VisualizationSimulator() {
 
 }
 
+void VisualizationSimulator::Pause() {
+    if (isPaused == false) {
+        isPaused = true;
+        std::cout << "~~~~~~~~~~ The simulation is paused ~~~~~~~~~~" << std::endl;
+    }
+    else {
+        isPaused = false;
+        std::cout << "~~~~~~~~~~ The simulation is running again ~~~~~~~~~~" << std::endl;
+    }
+}
+
 void VisualizationSimulator::Start(const std::vector<int>& busStartTimings, const int& numTimeSteps) {
     busStartTimings_ = busStartTimings;
     numTimeSteps_ = numTimeSteps;
@@ -37,63 +48,65 @@ void VisualizationSimulator::Start(const std::vector<int>& busStartTimings, cons
 }
 
 void VisualizationSimulator::Update() {
-    simulationTimeElapsed_++;
-    RandomBusFactory randomBusFactory;
+    if (!isPaused) {
+        
+        simulationTimeElapsed_++;
+        RandomBusFactory randomBusFactory;
 
-    std::cout << "~~~~~~~~~~ The time is now " << simulationTimeElapsed_;
-    std::cout << "~~~~~~~~~~" << std::endl;
+        std::cout << "~~~~~~~~~~ The time is now " << simulationTimeElapsed_;
+        std::cout << "~~~~~~~~~~" << std::endl;
 
-    std::cout << "~~~~~~~~~~ Generating new busses if needed ";
-    std::cout << "~~~~~~~~~~" << std::endl;
+        std::cout << "~~~~~~~~~~ Generating new busses if needed ";
+        std::cout << "~~~~~~~~~~" << std::endl;
 
-    // Check if we need to generate new busses
-    for (int i = 0; i < static_cast<int>(timeSinceLastBus_.size()); i++) {
-        // Check if we need to make a new bus
-        if (0 >= timeSinceLastBus_[i]) {
+        // Check if we need to generate new busses
+        for (int i = 0; i < static_cast<int>(timeSinceLastBus_.size()); i++) {
+            // Check if we need to make a new bus
+            if (0 >= timeSinceLastBus_[i]) {
 
-            Route * outbound = prototypeRoutes_[2 * i];
-            Route * inbound = prototypeRoutes_[2 * i + 1];
+                Route * outbound = prototypeRoutes_[2 * i];
+                Route * inbound = prototypeRoutes_[2 * i + 1];
 
-            // Here I am calling the Bus Constructor, I want to call a my random factory instead.
-            busses_.push_back(randomBusFactory.GenerateBus(std::to_string(busId), outbound->Clone(), inbound->Clone(), 1));
-            // busses_.push_back(new Bus(std::to_string(busId), outbound->Clone(), inbound->Clone(), 60, 1));
+                // Here I am calling the Bus Constructor, I want to call a my random factory instead.
+                busses_.push_back(randomBusFactory.GenerateBus(std::to_string(busId), outbound->Clone(), inbound->Clone(), 1));
+                // busses_.push_back(new Bus(std::to_string(busId), outbound->Clone(), inbound->Clone(), 60, 1));
 
 
-            busId++;
+                busId++;
+                
+                timeSinceLastBus_[i] = busStartTimings_[i];
+            } else {
+                timeSinceLastBus_[i]--;
+            }
+        }   
+        
+        std::cout << "~~~~~~~~~ Updating busses ";
+        std::cout << "~~~~~~~~~" << std::endl;
+
+        // Update busses
+        for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+            busses_[i]->Update();
+
+            if (busses_[i]->IsTripComplete()) { 
+                webInterface_->UpdateBus(busses_[i]->GetBusData(), true);
+                busses_.erase(busses_.begin() + i);
+                continue;
+            }
             
-            timeSinceLastBus_[i] = busStartTimings_[i];
-        } else {
-            timeSinceLastBus_[i]--;
-        }
-    }   
-    
-    std::cout << "~~~~~~~~~ Updating busses ";
-    std::cout << "~~~~~~~~~" << std::endl;
+            webInterface_->UpdateBus(busses_[i]->GetBusData());
 
-    // Update busses
-    for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
-        busses_[i]->Update();
-
-        if (busses_[i]->IsTripComplete()) { 
-            webInterface_->UpdateBus(busses_[i]->GetBusData(), true);
-            busses_.erase(busses_.begin() + i);
-            continue;
+            busses_[i]->Report(std::cout);
         }
         
-        webInterface_->UpdateBus(busses_[i]->GetBusData());
+        std::cout << "~~~~~~~~~ Updating routes ";
+        std::cout << "~~~~~~~~~" << std::endl;
+        // Update routes
+        for (int i = 0; i < static_cast<int>(prototypeRoutes_.size()); i++) {
+            prototypeRoutes_[i]->Update();
 
-        busses_[i]->Report(std::cout);
+            webInterface_->UpdateRoute(prototypeRoutes_[i]->GetRouteData());
+
+            prototypeRoutes_[i]->Report(std::cout);
+        }
     }
-    
-    std::cout << "~~~~~~~~~ Updating routes ";
-    std::cout << "~~~~~~~~~" << std::endl;
-    // Update routes
-    for (int i = 0; i < static_cast<int>(prototypeRoutes_.size()); i++) {
-        prototypeRoutes_[i]->Update();
-
-        webInterface_->UpdateRoute(prototypeRoutes_[i]->GetRouteData());
-
-        prototypeRoutes_[i]->Report(std::cout);
-    }
- 
 }
