@@ -3,6 +3,8 @@
 
 #include "bus.h"
 #include "route.h"
+#include "abstract_bus_factory.h"
+#include "random_bus_factory.h"
 
 VisualizationSimulator::VisualizationSimulator(WebInterface* webI, ConfigManager* configM) {
     webInterface_ = webI;
@@ -36,6 +38,7 @@ void VisualizationSimulator::Start(const std::vector<int>& busStartTimings, cons
 
 void VisualizationSimulator::Update() {
     simulationTimeElapsed_++;
+    RandomBusFactory randomBusFactory;
 
     std::cout << "~~~~~~~~~~ The time is now " << simulationTimeElapsed_;
     std::cout << "~~~~~~~~~~" << std::endl;
@@ -51,7 +54,11 @@ void VisualizationSimulator::Update() {
             Route * outbound = prototypeRoutes_[2 * i];
             Route * inbound = prototypeRoutes_[2 * i + 1];
 
-            busses_.push_back(new Bus(std::to_string(busId), outbound->Clone(), inbound->Clone(), 60, 1));
+            // Here I am calling the Bus Constructor, I want to call a my random factory instead.
+            busses_.push_back(randomBusFactory.GenerateBus(std::to_string(busId), outbound->Clone(), inbound->Clone(), 1));
+            // busses_.push_back(new Bus(std::to_string(busId), outbound->Clone(), inbound->Clone(), 60, 1));
+
+
             busId++;
             
             timeSinceLastBus_[i] = busStartTimings_[i];
