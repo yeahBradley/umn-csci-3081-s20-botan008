@@ -9,7 +9,8 @@
 
 #include "src/random_bus_factory.h"
 
-Bus* RandomBusFactory::GenerateBus(std::string name, Route* out, Route* in, double speed) {
+Bus* RandomBusFactory::GenerateBus(std::string name, Route* out, Route* in,
+                                                             double speed) {
     SmallBusFactory smallBusFactory;
     RegularBusFactory regularBusFactory;
     LargeBusFactory largeBusFactory;
@@ -18,8 +19,8 @@ Bus* RandomBusFactory::GenerateBus(std::string name, Route* out, Route* in, doub
     std::mt19937 rng(dev());
     std::uniform_int_distribution<std::mt19937::result_type> dist1(1, 3);
     int rand_int = dist1(rng);
-    
-    switch(rand_int) {
+
+    switch (rand_int) {
         case 1:
             return smallBusFactory.GenerateBus(name, out, in, speed);
         case 2:
@@ -29,5 +30,4 @@ Bus* RandomBusFactory::GenerateBus(std::string name, Route* out, Route* in, doub
         default:
             return regularBusFactory.GenerateBus(name, out, in, speed);
     }
-
-};
+}

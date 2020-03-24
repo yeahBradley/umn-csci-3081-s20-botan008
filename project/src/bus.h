@@ -25,7 +25,7 @@ class Route;
 class Stop;
 
 enum BusType {
-  BT_SMALL=30, BT_REGULAR=60, BT_LARGE=90
+  BT_SMALL = 30, BT_REGULAR = 60, BT_LARGE = 90
 };
 
 class Bus {

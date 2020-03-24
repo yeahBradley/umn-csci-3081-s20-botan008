@@ -8,6 +8,7 @@
 #define SRC_SMALL_BUS_H_
 
 #include <iostream>
+#include <string>
 
 #include "src/bus.h"
 
@@ -17,7 +18,6 @@ class SmallBus : public Bus{
   void Report(std::ostream&) override;
 
  private:
-
 };
 
 #endif  // SRC_SMALL_BUS_H_

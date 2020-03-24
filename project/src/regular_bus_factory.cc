@@ -6,9 +6,9 @@
 
 #include "src/regular_bus_factory.h"
 
-RegularBus* RegularBusFactory::GenerateBus(std::string name, Route* out, Route* in, double speed) {
+RegularBus* RegularBusFactory::GenerateBus(std::string name, Route* out,
+                                             Route* in, double speed) {
     RegularBus *bus1;
     bus1 = new RegularBus(name, out, in, speed);
     return bus1;
-
-};
+}

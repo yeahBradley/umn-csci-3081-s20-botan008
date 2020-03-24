@@ -6,10 +6,10 @@
 
 #include "src/small_bus.h"
 
-SmallBus::SmallBus(std::string name, Route* out, Route* in, double speed) : 
-                                            Bus(name, out, in, BT_SMALL, speed) {
-  //Bus::Bus(name, out, in, 30, speed);
-  //passenger_max_capacity_ = 30;
+SmallBus::SmallBus(std::string name, Route* out, Route* in, double speed) :
+                                         Bus(name, out, in, BT_SMALL, speed) {
+  // Bus::Bus(name, out, in, 30, speed);
+  // passenger_max_capacity_ = 30;
 }
 
 void SmallBus::Report(std::ostream& out) {
