@@ -8,6 +8,7 @@
 #define SRC_LARGE_BUS_H_
 
 #include <iostream>
+#include <string>
 
 #include "src/bus.h"
 
@@ -17,7 +18,6 @@ class LargeBus : public Bus{
   void Report(std::ostream&) override;
 
  private:
-  
 };
 
 #endif  // SRC_LARGE_BUS_H_

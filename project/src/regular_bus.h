@@ -8,6 +8,7 @@
 #define SRC_REGULAR_BUS_H_
 
 #include <iostream>
+#include <string>
 
 #include "src/bus.h"
 
@@ -17,7 +18,6 @@ class RegularBus : public Bus{
   void Report(std::ostream&) override;
 
  private:
-  
 };
 
 #endif  // SRC_REGULAR_BUS_H_
