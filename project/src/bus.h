@@ -24,6 +24,10 @@ class PassengerLoader;
 class Route;
 class Stop;
 
+enum BusType {
+  BT_SMALL = 30, BT_REGULAR = 60, BT_LARGE = 90
+};
+
 class Bus {
  public:
   Bus(std::string name, Route * out, Route * in, int capacity = 60,
@@ -32,7 +36,7 @@ class Bus {
   bool LoadPassenger(Passenger *);  // returning revenue delta
   bool Move();
   void Update();
-  void Report(std::ostream&);
+  void virtual Report(std::ostream&);
 
   // Vis Getters
   void UpdateBusData();

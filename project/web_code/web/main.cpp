@@ -28,6 +28,7 @@ int main(int argc, char**argv) {
 
         VisualizationSimulator* mySim = new VisualizationSimulator(myWS, cm);
 
+		state.commands["pause"] = new PauseCommand(mySim);
 		state.commands["getRoutes"] = new GetRoutesCommand(myWS);
 		state.commands["getBusses"] = new GetBussesCommand(myWS);
         state.commands["start"] = new StartCommand(mySim);
@@ -42,5 +43,6 @@ int main(int argc, char**argv) {
 
 	return 0;
 }
+
 
 

@@ -17,13 +17,18 @@ class VisualizationSimulator {
         VisualizationSimulator(WebInterface*, ConfigManager*);
         ~VisualizationSimulator();
 
+        /**
+         * @brief A functioning pause button was added to the browser display
+         *
+         */
+        void Pause();
         void Start(const std::vector<int>&, const int&);
         void Update();
 
     private:
         WebInterface* webInterface_;
         ConfigManager* configManager_;
-       
+
         std::vector<int> busStartTimings_;
         std::vector<int> timeSinceLastBus_;
         int numTimeSteps_;
@@ -33,6 +38,7 @@ class VisualizationSimulator {
         std::vector<Bus *> busses_;
 
         int busId = 1000;
+        bool isPaused = false;
 };
 
 #endif // VISUALIZATION_SIMULATOR_H_

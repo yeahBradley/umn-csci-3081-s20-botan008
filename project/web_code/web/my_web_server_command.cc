@@ -2,6 +2,17 @@
 #include "my_web_server_command.h" 
 
 
+PauseCommand::PauseCommand(VisualizationSimulator* sim) : mySim(sim) {}
+void PauseCommand::execute(MyWebServerSession* session, picojson::value& command, MyWebServerSessionState* state) {
+    (void)session;
+    (void)state;
+    (void)command;
+
+    mySim->Pause();
+}
+
+
+
 GetRoutesCommand::GetRoutesCommand(MyWebServer* ws) : myWS(ws) {}
 void GetRoutesCommand::execute(MyWebServerSession* session, picojson::value& command, MyWebServerSessionState* state) {
     // Unsused input
@@ -87,9 +98,7 @@ void GetBussesCommand::execute(MyWebServerSession* session, picojson::value& com
 
 
 
-StartCommand::StartCommand(VisualizationSimulator* sim) : mySim(sim), timeBetweenBusses(std::vector<int>()), numTimeSteps(10) {
-
-}
+StartCommand::StartCommand(VisualizationSimulator* sim) : mySim(sim), timeBetweenBusses(std::vector<int>()), numTimeSteps(10) {}
 void StartCommand::execute(MyWebServerSession* session, picojson::value& command, MyWebServerSessionState* state) {
     // Unused variables
     (void)session;
@@ -116,8 +125,7 @@ void StartCommand::execute(MyWebServerSession* session, picojson::value& command
 
 
 
-UpdateCommand::UpdateCommand(VisualizationSimulator* sim): mySim(sim) {}
-
+UpdateCommand::UpdateCommand(VisualizationSimulator* sim) : mySim(sim) {}
 void UpdateCommand::execute(MyWebServerSession* session, picojson::value& command, MyWebServerSessionState* state) {
     (void)session;
     (void)state;
@@ -129,7 +137,6 @@ void UpdateCommand::execute(MyWebServerSession* session, picojson::value& comman
 
 
 InitRoutesCommand::InitRoutesCommand(ConfigManager* configManager) : cm(configManager) {}
-
 void InitRoutesCommand::execute(MyWebServerSession* session, picojson::value& command, MyWebServerSessionState* state) {
     (void)state;
     (void)command;
@@ -144,4 +151,3 @@ void InitRoutesCommand::execute(MyWebServerSession* session, picojson::value& co
     session->sendJSON(ret);
 
 }
-

@@ -10,5 +10,12 @@ build
 # Ignore ~./gitmessage
 gitmessage
 
-# Ignore 
+# Ignore new .vscode file
 .vscode
+
+# Ignore the /docs/html/ and /dox/latex/ folder
+docs/html
+docs/latex
+
+# Adding an ignore for .nfs files that appear randomly
+.nfs*

@@ -29,6 +29,8 @@ var numTimeSteps;
 
 var startButton;
 var started;
+var pauseButton;
+var isPaused = false;
 
 var simInfoYRectPos = 1; // Magic numbers for GUI elements
 var simInfoYPos = 15;
@@ -163,6 +165,13 @@ function setup() {
     startButton.style('height', '20px');
     startButton.mousePressed(start);    
 
+    pauseButton = createButton('Pause');
+    pauseButton.position(10, startYPos+20);
+    pauseButton.value("Pause");
+    pauseButton.style('width', '200px');
+    pauseButton.style('height', '20px');
+    pauseButton.mousePressed(pause);
+
     // Image/map information
     const options = {
         lat: 44.9765,
@@ -197,7 +206,7 @@ function update() {
 
 	// Only update every specified timestep
     elapsedTime = millis() - startTime;
-    if (elapsedTime > updateTime && totalUpdates <= numTimeSteps) {
+    if (elapsedTime > updateTime && totalUpdates <= numTimeSteps && isPaused == false) {
         socket.send(JSON.stringify({command: "update"}));
         startTime = millis();
         totalUpdates++;
@@ -303,8 +312,27 @@ function start() {
     numTimeSteps = numTimeStepsSlider.value();
     socket.send(JSON.stringify({command: "start", numTimeSteps: numTimeSteps, timeBetweenBusses: busTimeOffsets}));
     started = true;
+    startButton.elt.disabled = true;
     elapsedTime = millis();
     startTime = millis();
+    pauseButton.value == "Pause";
+}
+
+function pause() {
+    if (started)
+    {
+        if (pauseButton.value!=="Resume"){
+            pauseButton.value="Resume";
+            pauseButton.elt.childNodes[0].nodeValue ="Resume";
+            isPaused = true;
+        }
+        else {
+            pauseButton.value="Pause";
+            pauseButton.elt.childNodes[0].nodeValue ="Pause";
+            isPaused = false;
+        }
+        socket.send(JSON.stringify({command: "pause"}));
+    }
 }
 
 function initRouteSliders() {
