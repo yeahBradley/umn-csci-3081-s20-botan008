@@ -3,20 +3,16 @@
  *
  * @copyright 2019 3081 Staff, All rights reserved.
  */
-
-/*******************************************************************************
- * Includes
- ******************************************************************************/
 #include <random>
 #include <string>
 #include "src/passenger_factory.h"
 
-/*
+/* 
  * if CONSPASS is defined, every passenger will have the same name and desination
  * which may be helpful for regression testing!
- */
+ *
 #define CONSTPASS 1
-
+*/
 
 std::random_device dev;
 std::mt19937 e(dev());

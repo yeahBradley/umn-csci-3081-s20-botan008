@@ -1,18 +1,20 @@
-### Feedback for Lab 10
+### Assessment for Lab 10
 
-Run on March 02, 10:18:57 AM.
+#### Total score: _100.0_ / _100_
+
+Run on March 03, 15:29:44 PM.
 
 
 ### Necessary Files and Structure
 
-+ Pass: Check that directory "labs" exists.
++  _10_ / _10_ : Pass: Check that directory "labs" exists.
 
-+ Pass: Check that directory "labs/lab10_advanced_git" exists.
++  _10_ / _10_ : Pass: Check that directory "labs/lab10_advanced_git" exists.
 
 
 ### Git Usage
 
-+ Pass: Run git ls-remote to check for existence of specific branch- Branch devel found
++  _10_ / _10_ : Pass: Run git ls-remote to check for existence of specific branch- Branch devel found
 
 + Pass: Checkout devel branch.
 
@@ -26,11 +28,11 @@ Run on March 02, 10:18:57 AM.
 
 		b9fb78e181fbaf4f41873d9c13736cb67dea1a5a	refs/heads/fix/02-google-style-pass
 
-		ff4c0688cae976005934456dd5eca130d1d09cb6	refs/heads/master
+		6acbde4aea6c13635ff1ac816dfb6df48f309a5d	refs/heads/master
 
 
 
-+ Pass: Checking for the correct number of branches
++  _10_ / _10_ : Pass: Checking for the correct number of branches
 
 Sufficient branches found (found=2, required=2):
 
@@ -206,7 +208,7 @@ This has been corrected. The program compiles.
 
 
 
-+ Pass: Check git commit history
++  _5_ / _5_ : Pass: Check git commit history
 Sufficient commits (found=36,required=4)
 
 
@@ -226,7 +228,7 @@ Sufficient commits (found=36,required=4)
 
 
 
-+ Pass: Run ghi for total number of issues in Github repo (Found: 2, Expected: 2) 
++  _10.0_ / _10_ : Pass: Run ghi for total number of issues in Github repo (Found: 2, Expected: 2) 
 
  [OPEN issue #] : 
 
@@ -245,13 +247,15 @@ Sufficient commits (found=36,required=4)
 
 
 
-+ Pass: Check that directory "project/src" exists.
++  _10_ / _10_ : Pass: Check that directory "project/src" exists.
 
 + Pass: Change into directory "project/src".
 
-+ Pass: Check that file "makefile" exists.
++  _5_ / _5_ : Pass: Check that file "makefile" exists.
 
-+ Pass: Check that make compiles.
++  _30_ / _30_ : Pass: Check that make compiles.
 
 
+
+#### Total score: _100.0_ / _100_
 

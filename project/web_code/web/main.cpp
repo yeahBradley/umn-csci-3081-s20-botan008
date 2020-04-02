@@ -10,7 +10,7 @@
 
 //#define _USE_MATH_DEFINES
 //#include <cmath>
-//#include <libwebsockets.h> 
+//#include <libwebsockets.h>
 
 
 int main(int argc, char**argv) {
@@ -20,20 +20,20 @@ int main(int argc, char**argv) {
 		int port = std::atoi(argv[1]);
 		MyWebServerSessionState state;
 
-        MyWebServer* myWS = new MyWebServer();
-        ConfigManager* cm = new ConfigManager();
-        
-        cm->ReadConfig("config.txt");
-        std::cout << "Using default config file: config.txt" << std::endl;
+    MyWebServer* myWS = new MyWebServer();
+    ConfigManager* cm = new ConfigManager();
 
-        VisualizationSimulator* mySim = new VisualizationSimulator(myWS, cm);
+    cm->ReadConfig("config.txt");
+    std::cout << "Using default config file: config.txt" << std::endl;
+
+    VisualizationSimulator* mySim = new VisualizationSimulator(myWS, cm);
 
 		state.commands["pause"] = new PauseCommand(mySim);
 		state.commands["getRoutes"] = new GetRoutesCommand(myWS);
 		state.commands["getBusses"] = new GetBussesCommand(myWS);
-        state.commands["start"] = new StartCommand(mySim);
-        state.commands["update"] = new UpdateCommand(mySim);
-        state.commands["initRoutes"] = new InitRoutesCommand(cm);
+    state.commands["start"] = new StartCommand(mySim);
+    state.commands["update"] = new UpdateCommand(mySim);
+    state.commands["initRoutes"] = new InitRoutesCommand(cm);
 
 		WebServerWithState<MyWebServerSession, MyWebServerSessionState> server(state, port);
 		while (true) {
@@ -43,6 +43,3 @@ int main(int argc, char**argv) {
 
 	return 0;
 }
-
-
-
