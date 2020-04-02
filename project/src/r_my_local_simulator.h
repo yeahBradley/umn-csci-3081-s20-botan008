@@ -1,16 +1,16 @@
 /**
- * @file r_local_simulator.h
+ * @file r_my_local_simulator.h
  *
  * @copyright 2019 3081 Staff, All rights reserved.
  */
-#ifndef SRC_LOCAL_SIMULATOR_H_
-#define SRC_LOCAL_SIMULATOR_H_
+#ifndef SRC_R_MY_LOCAL_SIMULATOR_H_
+#define SRC_R_MY_LOCAL_SIMULATOR_H_
 
 #include <vector>
 #include <string>
 #include "src/r_simulator.h"
 
-class rLocalSimulator : public rSimulator {
+class rMyLocalSimulator : public rSimulator {
  public:
   bool Start() override;
   bool Update() override;
@@ -21,4 +21,4 @@ class rLocalSimulator : public rSimulator {
   int simulation_time_elapsed_;
 };
 
-#endif  // SRC_LOCAL_SIMULATOR_H_
+#endif  // SRC_R_MY_LOCAL_SIMULATOR_H_

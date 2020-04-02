@@ -3,8 +3,8 @@
  *
  * @copyright 2019 3081 Staff, All rights reserved.
  */
-#ifndef SRC_SIMULATOR_H_
-#define SRC_SIMULATOR_H_
+#ifndef SRC_RSIMULATOR_H_
+#define SRC_RSIMULATOR_H_
 
 #include <list>
 #include <vector>
@@ -14,7 +14,7 @@
 #include "src/route.h"
 #include "src/passenger_generator.h"
 
-class Simulator {
+class rSimulator {
  public:
   virtual bool Start() = 0;
   virtual bool Update() = 0;
@@ -34,4 +34,4 @@ class Simulator {
   // std::vector<std:list<double>> passenger_generation_probability_lists;
 };
 
-#endif  // SRC_SIMULATOR_H_
+#endif  // SRC_RSIMULATOR_H_

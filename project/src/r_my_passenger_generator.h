@@ -1,11 +1,11 @@
 /**
- * @file rtest_passenger_generator.h
+ * @file r_my_passenger_generator.h
  *
  * @copyright 2019 3081 Staff, All rights reserved.
  */
 
-#ifndef SRC_RTEST_PASSENGER_GENERATOR_H_
-#define SRC_RTEST_PASSENGER_GENERATOR_H_
+#ifndef SRC_R_MY_PASSENGER_GENERATOR_H_
+#define SRC_R_MY_PASSENGER_GENERATOR_H_
 
 #include <list>
 #include <random>
@@ -16,13 +16,13 @@
 
 class Stop;  // forward declaration
 
-class RtestPassengerGenerator : public PassengerGenerator{
+class rMyPassengerGenerator : public PassengerGenerator{
  public:
-  RtestPassengerGenerator(std::list<double>, std::list<Stop *>);
+  rMyPassengerGenerator(std::list<double>, std::list<Stop *>);
   int GeneratePassengers() override;
 
  private:
   static std:: minstd_rand0 my_rand;
 };
 
-#endif  // SRC_RTEST_PASSENGER_GENERATOR_H_
+#endif  // SRC_R_MY_PASSENGER_GENERATOR_H_

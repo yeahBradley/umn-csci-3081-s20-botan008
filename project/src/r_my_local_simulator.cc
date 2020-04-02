@@ -1,9 +1,9 @@
 /**
- * @file local_simulator.cc
+ * @file r_my_local_simulator.cc
  *
  * @copyright 2019 3081 Staff, All rights reserved.
  */
-#include "src/r_local_simulator.h"
+#include "src/r_my_local_simulator.h"
 
 #include <vector>
 #include <list>
@@ -11,9 +11,9 @@
 #include "src/bus.h"
 #include "src/stop.h"
 #include "src/route.h"
-#include "src/r_passenger_generator.h"
+#include "src/r_my_passenger_generator.h"
 
-bool rLocalSimulator::Start() {
+bool rMyLocalSimulator::Start() {
   simulation_time_elapsed_ = 0;  // init, but also allows restart
 
   // int num_round_trips = 10;
@@ -135,8 +135,8 @@ bool rLocalSimulator::Start() {
   //RandomPassengerGenerator CC_EB_generator(CC_EB_probs, CC_EB_stops_list);
   //RandomPassengerGenerator CC_WB_generator(CC_WB_probs, CC_WB_stops_list);
 
- rPassengerGenerator * CC_EB_generator = new rPassengerGenerator (CC_EB_probs, CC_EB_stops_list);
- rPassengerGenerator * CC_WB_generator = new rPassengerGenerator (CC_WB_probs, CC_WB_stops_list);
+ rMyPassengerGenerator * CC_EB_generator = new rMyPassengerGenerator (CC_EB_probs, CC_EB_stops_list);
+ rMyPassengerGenerator * CC_WB_generator = new rMyPassengerGenerator (CC_WB_probs, CC_WB_stops_list);
 
   //Test to ensure generators are working
   //Helpful for debugging
@@ -169,7 +169,7 @@ bool rLocalSimulator::Start() {
   return true;
 }
 
-bool rLocalSimulator::Update() {
+bool rMyLocalSimulator::Update() {
   // increase time
   simulation_time_elapsed_++;
   std::cout << "~~~~~~~~~~~~~ The time is now " << simulation_time_elapsed_;
