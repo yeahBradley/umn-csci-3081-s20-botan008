@@ -3,8 +3,7 @@
 
 #include "bus.h"
 #include "route.h"
-#include "abstract_bus_factory.h"
-#include "random_bus_factory.h"
+#include "bus_factories.h"
 
 VisualizationSimulator::VisualizationSimulator(WebInterface* webI, ConfigManager* configM) {
     webInterface_ = webI;
@@ -40,7 +39,7 @@ void VisualizationSimulator::Start(const std::vector<int>& busStartTimings, cons
     prototypeRoutes_ = configManager_->GetRoutes();
     for (int i = 0; i < static_cast<int>(prototypeRoutes_.size()); i++) {
         prototypeRoutes_[i]->Report(std::cout);
-        
+
         prototypeRoutes_[i]->UpdateRouteData();
         webInterface_->UpdateRoute(prototypeRoutes_[i]->GetRouteData());
     }
@@ -49,7 +48,7 @@ void VisualizationSimulator::Start(const std::vector<int>& busStartTimings, cons
 
 void VisualizationSimulator::Update() {
     if (!isPaused) {
-        
+
         simulationTimeElapsed_++;
         RandomBusFactory randomBusFactory;
 
@@ -73,13 +72,13 @@ void VisualizationSimulator::Update() {
 
 
                 busId++;
-                
+
                 timeSinceLastBus_[i] = busStartTimings_[i];
             } else {
                 timeSinceLastBus_[i]--;
             }
-        }   
-        
+        }
+
         std::cout << "~~~~~~~~~ Updating busses ";
         std::cout << "~~~~~~~~~" << std::endl;
 
@@ -87,17 +86,17 @@ void VisualizationSimulator::Update() {
         for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
             busses_[i]->Update();
 
-            if (busses_[i]->IsTripComplete()) { 
+            if (busses_[i]->IsTripComplete()) {
                 webInterface_->UpdateBus(busses_[i]->GetBusData(), true);
                 busses_.erase(busses_.begin() + i);
                 continue;
             }
-            
+
             webInterface_->UpdateBus(busses_[i]->GetBusData());
 
             busses_[i]->Report(std::cout);
         }
-        
+
         std::cout << "~~~~~~~~~ Updating routes ";
         std::cout << "~~~~~~~~~" << std::endl;
         // Update routes
