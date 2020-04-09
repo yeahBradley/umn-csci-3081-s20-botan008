@@ -89,7 +89,7 @@ protected:
     route_OUT = new Route(route1Name, stops_OUT, distances_OUT, num_stops, &PassengerGenerator);
     //Route *route_IN;
     route_IN = new Route(route2Name, stops_IN, distances_IN, num_stops, &PassengerGenerator);
-    
+
     bus1 = new Bus(bus1Name, route_OUT, route_IN, capacity, speed);
     bus2 = new Bus(bus2Name, route_OUT, route_IN);
     bus3 = new Bus("bus3", route_OUT, route_IN, 1);
@@ -101,7 +101,7 @@ protected:
     // cout << "delete[] distances completed" << endl;
     for (int i = 0; i < 3; i++) {
       delete stops_OUT[i];
-    
+
       // cout << "delete stops[" << i << "] completed" << endl;
     }
     delete[] stops_OUT;
@@ -120,7 +120,7 @@ protected:
  * Test Cases: Constructors and methods that return a boolean
  ******************************************************************************/
 TEST_F(BusTests, Constructor_params) {  // name, route, route, capacity, speed
-  
+
   // Testing GetName getter function
   EXPECT_EQ(bus1->GetName(), "bus1");
 
@@ -150,14 +150,14 @@ TEST_F(BusTests, IsTripComplete_false) {
 TEST_F(BusTests, IsTripComplete_true) {
   EXPECT_EQ(bus1->IsTripComplete(), false);
   EXPECT_EQ(bus2->IsTripComplete(), false);
-  route_OUT->NextStop();  // increment destination_stop_index_
-  route_OUT->NextStop();  // increment destination_stop_index_
-  route_OUT->NextStop();  // increment destination_stop_index_
+  route_OUT->ToNextStop();  // increment destination_stop_index_
+  route_OUT->ToNextStop();  // increment destination_stop_index_
+  route_OUT->ToNextStop();  // increment destination_stop_index_
   EXPECT_EQ(bus1->IsTripComplete(), false);
   EXPECT_EQ(bus2->IsTripComplete(), false);
-  route_IN->NextStop();  // increment destination_stop_index_
-  route_IN->NextStop();  // increment destination_stop_index_
-  route_IN->NextStop();  // increment destination_stop_index_
+  route_IN->ToNextStop();  // increment destination_stop_index_
+  route_IN->ToNextStop();  // increment destination_stop_index_
+  route_IN->ToNextStop();  // increment destination_stop_index_
   EXPECT_EQ(bus1->IsTripComplete(), true);
   EXPECT_EQ(bus2->IsTripComplete(), true);
 }
@@ -166,7 +166,7 @@ TEST_F(BusTests, LoadPassenger_false) {
   Passenger *passenger2 = new Passenger();
   bus3->LoadPassenger(passenger1);
   EXPECT_EQ(bus3->LoadPassenger(passenger2), false);
-  delete passenger1; 
+  delete passenger1;
   delete passenger2;
 }
 TEST_F(BusTests, LoadPassenger_true) {
@@ -209,7 +209,7 @@ TEST_F(BusTests, Move_true) {
   // Move should return false because bus is starting at a stop
   // Arithmetic error occurs here, distance_remaining_ becomes -1
   // At function end distance_remaining_ is 1
-  // EXPECT_EQ(bus1->Move(), true); 
+  // EXPECT_EQ(bus1->Move(), true);
   bus1->Move();
 
   // **2**
@@ -220,7 +220,7 @@ TEST_F(BusTests, Move_true) {
 
   // **3** SUCCESSFUL Move
   // Move should return true because distance_remaining_ changed from 2 to 1
-  // The Bus is moving to stop 3, 
+  // The Bus is moving to stop 3,
   // At function end distance_remaining_ is 1
   EXPECT_EQ(bus1->Move(), true);
 
@@ -239,17 +239,17 @@ TEST_F(BusTests, Move_true) {
   // EXPECT_EQ(bus1->Move(), true);
   bus1->Move();
 
-  // **6**  
+  // **6**
   // Move should return true because distance_remaining_ changed from 1 to 0
   // Because of the previous arithmetic error, the bus reaches stop 2 on this call
   // At function end distance_remaining_ is 2
-  EXPECT_EQ(bus1->Move(), true);  
+  EXPECT_EQ(bus1->Move(), true);
 
   // **7** SUCCESSFUL Move
   // Move should return true because distance_remaining_ changed from 2 to 1
-  // The bus is moving to stop 1, 
+  // The bus is moving to stop 1,
   // At function end distance_remaining_ is 1
-  EXPECT_EQ(bus1->Move(), true);  
+  EXPECT_EQ(bus1->Move(), true);
 
   // **8**
   // Move should return true because distance_remaining_ changed from 1 to 0
@@ -257,12 +257,12 @@ TEST_F(BusTests, Move_true) {
   // However, GetNextStopDistance returns 0
   // At function end distance_remaining_ is 0
   EXPECT_EQ(bus1->Move(), true);
-  EXPECT_EQ(bus1->Move(), true);  
+  EXPECT_EQ(bus1->Move(), true);
 
   // **9**
   // Both routes are complete, Move should return false
   // At function end distance_remaining_ is 999
-  // EXPECT_EQ(bus1->Move(), true);  
+  // EXPECT_EQ(bus1->Move(), true);
   bus1->Move();
 
 
@@ -286,7 +286,7 @@ TEST_F(BusTests, Move_false) {
 
   // the bus switches from outgoing route to incoming route at the 5th move
   // but this should actually happen at the 6th move
-  EXPECT_EQ(bus1->Move(), false); 
+  EXPECT_EQ(bus1->Move(), false);
   bus1->Move();
   bus1->Move();
   bus1->Move();

@@ -40,9 +40,9 @@ protected:
     //list<Stop *> stops_list;
     //Stop * stop1
     stop1 = new Stop(0, 25.0, 25.0);
-    //Stop * stop2 
+    //Stop * stop2
     stop2 = new Stop(1, 50.0, 50.0);
-    //Stop * stop3 
+    //Stop * stop3
     stop3 = new Stop(2, 75.0, 75.0);
     stops_list.push_back(stop1);
     stops[0] = stop1;
@@ -85,7 +85,7 @@ protected:
  * Test Cases: Constructors and methods that return a boolean
  ******************************************************************************/
 TEST_F(RouteTests, Constructor_default) {  // name, **stops, *distances, num_stops, *PassengerGenerator
-  
+
   // Testing GetName Getter function
   EXPECT_EQ(route->GetName(), name);
 
@@ -151,7 +151,7 @@ TEST_F(RouteTests, IsAtEnd_false) {
   delete stops;
   // cout << "delete stops completed" << endl;
 }
-TEST_F(RouteTests, IsAtEnd_true) {  
+TEST_F(RouteTests, IsAtEnd_true) {
   string name = "one";
 
   Stop ** stops = new Stop *[4];
@@ -181,9 +181,9 @@ TEST_F(RouteTests, IsAtEnd_true) {
 
   route = new Route(name, stops, distances, num_stops, &PassengerGenerator);
 
-  route->NextStop();  // increment destination_stop_index_
-  route->NextStop();  // increment destination_stop_index_
-  route->NextStop();  // increment destination_stop_index_
+  route->ToNextStop();  // increment destination_stop_index_
+  route->ToNextStop();  // increment destination_stop_index_
+  route->ToNextStop();  // increment destination_stop_index_
 
   // Now, destination_stop_index_ = 3 >= num_stops_
   EXPECT_EQ(route->IsAtEnd(), true);
