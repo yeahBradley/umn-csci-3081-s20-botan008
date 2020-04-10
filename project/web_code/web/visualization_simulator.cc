@@ -14,6 +14,24 @@ VisualizationSimulator::~VisualizationSimulator() {
 
 }
 
+void VisualizationSimulator::ClearListeners() {
+    // TODO(me) : Needs to check if the vector of observers is empty
+    for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+        busses_[i]->ClearObservers();
+    }
+}
+
+void VisualizationSimulator::AddListener(std::string* id, IObserver* observer) {
+    std::cout << *id << std::endl;
+
+    for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+        if (busses_[i]->GetName() == *id) {
+            busses_[i]->RegisterObserver(observer);
+        }
+    }
+    //bwo.notify();
+}
+
 void VisualizationSimulator::Pause() {
     if (isPaused == false) {
         isPaused = true;
