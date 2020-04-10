@@ -10,11 +10,32 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include "src/bus_deployment.h"
 #include "src/abstract_bus_factory.h"
 #include "src/bus_types.h"
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief StrategyBusFactory class that inherits from AbstractBusFactory
+ *
+ */
+class StrategyBusFactory : public AbstractBusFactory{
+public:
+/**
+ * @brief GenerateBus overrides the virutal function in AbstractBusFactory
+ *
+ * @param[in] string name: name for the bus
+ * @param[in] Route* out: pointer to outbound route
+ * @param[in] Route* in: pointer to inbound route
+ * @param[in] double speed: speed of bus in time step units
+ *
+ * @return Pointer to a Bus object, used for derived/base class pointer conversion
+ */
+ Bus* GenerateBus(std::string name, Route* out, Route* in,
+                                   double speed) override;
+};
+
 /**
  * @brief RandomBusFactory class that inherits from AbstractBusFactory
  *
