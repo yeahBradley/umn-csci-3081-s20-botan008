@@ -8,5 +8,5 @@
 
 class IObserver {
  public:
-  virtual void UpdateObserver(BusData * info) = 0;
-}
+  virtual void Notify(BusData * info) = 0;
+};

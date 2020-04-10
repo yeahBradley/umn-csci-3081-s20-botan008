@@ -5,13 +5,14 @@
  */
 
 #include <vector>
+#include "src/i_observer.h"
 
 class IObservable {
 public:
-  void RegisterObserver (IObserver * observer);
-  void ClearObserver();
-  void NotifyObservers(IObserver * );
+  void RegisterObserver(IObserver * observer);
+  void ClearObservers();
+  void NotifyObservers(BusData * busData);
 
 private:
-  vector<IObserver *> observer_;
-}
+  std::vector<IObserver *> observer_;
+};

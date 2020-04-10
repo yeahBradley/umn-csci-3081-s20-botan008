@@ -11,8 +11,8 @@
 #include <list>
 #include <string>
 
+#include "src/i_observable.h"
 #include "src/data_structs.h"
-
 #include "src/passenger.h"
 #include "src/passenger_loader.h"
 #include "src/passenger_unloader.h"

@@ -19,6 +19,7 @@ Bus::Bus(std::string name, Route * out, Route * in,
   next_stop_ = out->GetDestinationStop();
   unloader_ = new PassengerUnloader;
   loader_ = new PassengerLoader;
+  UpdateBusData();
 }
 
 bool Bus::IsTripComplete() {
@@ -184,6 +185,7 @@ bool Bus::Move() {
 void Bus::Update() {  // using common Update format
   Move();
   UpdateBusData();
+  NotifyObservers(&bus_data_);
 }
 
 void Bus::Report(std::ostream& out) {

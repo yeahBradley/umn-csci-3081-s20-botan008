@@ -11,13 +11,13 @@ void IObservable::RegisterObserver(IObserver * observer) {
 }
 
 void IObservable::ClearObservers() {
-  observer_.erase(std::remove(observer_.begin(), observer_.end(), observer), list.end());
+  observer_.clear();
 }
 
-void IObservable::NotifyObservers(IObserver * ) {
-  for(vector<IObserver *>::const_iterator iter = observer_.begin(); iter != observer.end(); ++iter) {
+void IObservable::NotifyObservers(BusData * info) {
+  for(std::vector<IObserver *>::const_iterator iter = observer_.begin(); iter != observer_.end(); ++iter) {
     if(*iter != 0) {
-      (*iter)->UpdateObserver(&bus_data_);
+      (*iter)->Notify(info);
     }
   }
 }

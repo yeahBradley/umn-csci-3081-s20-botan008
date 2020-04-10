@@ -28,6 +28,7 @@ int main(int argc, char**argv) {
 
     VisualizationSimulator* mySim = new VisualizationSimulator(myWS, cm);
 
+		state.commands["listen"] = new AddListenerCommand(mySim);
 		state.commands["pause"] = new PauseCommand(mySim);
 		state.commands["getRoutes"] = new GetRoutesCommand(myWS);
 		state.commands["getBusses"] = new GetBussesCommand(myWS);

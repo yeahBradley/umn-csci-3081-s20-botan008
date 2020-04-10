@@ -17,6 +17,8 @@ class VisualizationSimulator {
         VisualizationSimulator(WebInterface*, ConfigManager*);
         ~VisualizationSimulator();
 
+        void ClearListeners();
+        void AddListener(std::string* id, IObserver* observer);
         /**
          * @brief A functioning pause button was added to the browser display
          *
