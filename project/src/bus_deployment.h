@@ -10,27 +10,27 @@
 #include "src/bus.h"
 
 class BusDeployment {
-public:
+ public:
   virtual int execute() = 0;
 };
 
 class MorningStrategy : public BusDeployment {
-public:
+ public:
   int execute() override;
 };
 
 class AfternoonStrategy : public BusDeployment {
-public:
+ public:
   int execute() override;
 };
 
 class EveningStrategy : public BusDeployment {
-public:
+ public:
   int execute() override;
 };
 
 class OvernightStrategy : public BusDeployment {
-public:
+ public:
   int execute() override;
 };
 #endif  // SRC_BUS_DEPLOYMENT_H_

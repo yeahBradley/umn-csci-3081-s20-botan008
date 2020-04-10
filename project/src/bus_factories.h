@@ -21,7 +21,7 @@
  *
  */
 class StrategyBusFactory : public AbstractBusFactory{
-public:
+ public:
 /**
  * @brief GenerateBus overrides the virutal function in AbstractBusFactory
  *
@@ -32,8 +32,8 @@ public:
  *
  * @return Pointer to a Bus object, used for derived/base class pointer conversion
  */
- Bus* GenerateBus(std::string name, Route* out, Route* in,
-                                   double speed) override;
+  Bus* GenerateBus(std::string name, Route* out, Route* in,
+  double speed) override;
 };
 
 /**
