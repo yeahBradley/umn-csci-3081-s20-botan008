@@ -18,12 +18,15 @@ class VisualizationSimulator {
         VisualizationSimulator(WebInterface*, ConfigManager*);
         ~VisualizationSimulator();
         /**
-         * @brief Method for the Observer Pattern that clears observers
+         * @brief This method works in tandem with the back end observer pattern to clear registered busses
          *
          */
         void ClearListeners();
         /**
-         * @brief Method for the Observer Patter that adds observers
+         * @brief This method works in tandem with the back end observer pattern to register the selected bus
+         *
+         * @param[in] string* id: pointer to the name of the bus that will registered
+         * @param[in] IObserver* observer: pointer to the observer that will be registered with the subject
          *
          */
         void AddListener(std::string* id, IObserver* observer);

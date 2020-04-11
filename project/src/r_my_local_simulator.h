@@ -5,14 +5,34 @@
  */
 #ifndef SRC_R_MY_LOCAL_SIMULATOR_H_
 #define SRC_R_MY_LOCAL_SIMULATOR_H_
-
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <vector>
 #include <string>
 #include "src/r_simulator.h"
-
+/*******************************************************************************
+ * Class Definitions
+ ******************************************************************************/
+/**
+* @brief This class emulates visualization simulator for the purposes of my regression test.
+*
+*/
 class rMyLocalSimulator : public rSimulator {
  public:
+/**
+ * @brief Begins the simulation by creating the stops, routes, and busses needed.
+ *
+ * @return bool: This return type isn't strictly necessary as the method cannot return false, but is kept as legacy with the given regression test.
+ *
+ */
   bool Start() override;
+/**
+ * @brief Updates all the components (stops, busses, routes, etc.) of the simulation one after the other.
+ *
+ * @return bool: This return type isn't strictly necessary as the method cannot return false, but is kept as legacy with the given regression test.
+ *
+ */
   bool Update() override;
  private:
   std::vector<int> bus_counters_;
