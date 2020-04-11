@@ -1,32 +1,47 @@
+// Copyright 2020 Bradley Botanel
 
-#include "visualization_simulator.h"
+#include <string>
+#include "web_code/web/visualization_simulator.h"
+#include "src/bus.h"
+#include "src/route.h"
+#include "src/bus_factories.h"
 
-#include "bus.h"
-#include "route.h"
-#include "abstract_bus_factory.h"
-#include "random_bus_factory.h"
-
-VisualizationSimulator::VisualizationSimulator(WebInterface* webI, ConfigManager* configM) {
+VisualizationSimulator::VisualizationSimulator(WebInterface* webI,
+  ConfigManager* configM) {
     webInterface_ = webI;
     configManager_ = configM;
 }
 
-VisualizationSimulator::~VisualizationSimulator() {
+VisualizationSimulator::~VisualizationSimulator() {}
 
+void VisualizationSimulator::ClearListeners() {
+    for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+        busses_[i]->ClearObservers();
+    }
+}
+
+void VisualizationSimulator::AddListener(std::string* id, IObserver* observer) {
+    for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+        if (busses_[i]->GetName() == *id) {
+            busses_[i]->RegisterObserver(observer);
+        }
+    }
 }
 
 void VisualizationSimulator::Pause() {
     if (isPaused == false) {
         isPaused = true;
-        std::cout << "~~~~~~~~~~ The simulation is paused ~~~~~~~~~~" << std::endl;
-    }
-    else {
+        std::cout << "~~~~~~~~~~ The simulation is paused ~~~~~~~~~~" <<
+        std::endl;
+    } else {
         isPaused = false;
-        std::cout << "~~~~~~~~~~ The simulation is running again ~~~~~~~~~~" << std::endl;
+        std::cout << "~~~~~~~~~~ The simulation is running again ~~~~~~~~~~" <<
+        std::endl;
     }
 }
 
-void VisualizationSimulator::Start(const std::vector<int>& busStartTimings, const int& numTimeSteps) {
+void VisualizationSimulator::Start(const std::vector<int>& busStartTimings,
+  const int& numTimeSteps) {
     busStartTimings_ = busStartTimings;
     numTimeSteps_ = numTimeSteps;
 
@@ -40,18 +55,16 @@ void VisualizationSimulator::Start(const std::vector<int>& busStartTimings, cons
     prototypeRoutes_ = configManager_->GetRoutes();
     for (int i = 0; i < static_cast<int>(prototypeRoutes_.size()); i++) {
         prototypeRoutes_[i]->Report(std::cout);
-        
+
         prototypeRoutes_[i]->UpdateRouteData();
         webInterface_->UpdateRoute(prototypeRoutes_[i]->GetRouteData());
     }
-
 }
 
 void VisualizationSimulator::Update() {
     if (!isPaused) {
-        
         simulationTimeElapsed_++;
-        RandomBusFactory randomBusFactory;
+        StrategyBusFactory strategyBusFactory;
 
         std::cout << "~~~~~~~~~~ The time is now " << simulationTimeElapsed_;
         std::cout << "~~~~~~~~~~" << std::endl;
@@ -63,23 +76,24 @@ void VisualizationSimulator::Update() {
         for (int i = 0; i < static_cast<int>(timeSinceLastBus_.size()); i++) {
             // Check if we need to make a new bus
             if (0 >= timeSinceLastBus_[i]) {
-
                 Route * outbound = prototypeRoutes_[2 * i];
                 Route * inbound = prototypeRoutes_[2 * i + 1];
 
-                // Here I am calling the Bus Constructor, I want to call a my random factory instead.
-                busses_.push_back(randomBusFactory.GenerateBus(std::to_string(busId), outbound->Clone(), inbound->Clone(), 1));
-                // busses_.push_back(new Bus(std::to_string(busId), outbound->Clone(), inbound->Clone(), 60, 1));
 
+                busses_.push_back(strategyBusFactory.GenerateBus(
+                  std::to_string(busId), outbound->Clone(),
+                  inbound->Clone(), 1));
+                // busses_.push_back(new Bus(std::to_string(busId),
+                //   outbound->Clone(), inbound->Clone(), 60, 1));
 
                 busId++;
-                
+
                 timeSinceLastBus_[i] = busStartTimings_[i];
             } else {
                 timeSinceLastBus_[i]--;
             }
-        }   
-        
+        }
+
         std::cout << "~~~~~~~~~ Updating busses ";
         std::cout << "~~~~~~~~~" << std::endl;
 
@@ -87,17 +101,17 @@ void VisualizationSimulator::Update() {
         for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
             busses_[i]->Update();
 
-            if (busses_[i]->IsTripComplete()) { 
+            if (busses_[i]->IsTripComplete()) {
                 webInterface_->UpdateBus(busses_[i]->GetBusData(), true);
                 busses_.erase(busses_.begin() + i);
                 continue;
             }
-            
+
             webInterface_->UpdateBus(busses_[i]->GetBusData());
 
             busses_[i]->Report(std::cout);
         }
-        
+
         std::cout << "~~~~~~~~~ Updating routes ";
         std::cout << "~~~~~~~~~" << std::endl;
         // Update routes

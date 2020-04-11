@@ -2,7 +2,7 @@
  * @file bus.h
  *
  * @copyright 2019 3081 Staff, All rights reserved.
- * 
+ *
  */
 #ifndef SRC_BUS_H_
 #define SRC_BUS_H_
@@ -11,8 +11,8 @@
 #include <list>
 #include <string>
 
+#include "src/i_observable.h"
 #include "src/data_structs.h"
-
 #include "src/passenger.h"
 #include "src/passenger_loader.h"
 #include "src/passenger_unloader.h"
@@ -28,7 +28,7 @@ enum BusType {
   BT_SMALL = 30, BT_REGULAR = 60, BT_LARGE = 90
 };
 
-class Bus {
+class Bus : public IObservable {
  public:
   Bus(std::string name, Route * out, Route * in, int capacity = 60,
                                                  double speed = 1);

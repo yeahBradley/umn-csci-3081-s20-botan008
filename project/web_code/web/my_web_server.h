@@ -1,15 +1,12 @@
-
-#ifndef MY_WEB_SERVER_H
-#define MY_WEB_SERVER_H
+// Copyright 2020 Bradley Botanel
+#ifndef WEB_MY_WEB_SERVER_H_
+#define WEB_MY_WEB_SERVER_H_
 
 #include <vector>
-
-#include "web_interface.h"
-
+#include "web_code/web/web_interface.h"
 
 class MyWebServer : public WebInterface {
-    
-    public:
+ public:
         MyWebServer();
         ~MyWebServer() {}
 
@@ -18,7 +15,6 @@ class MyWebServer : public WebInterface {
 
         std::vector<RouteData> routes;
         std::vector<BusData> busses;
-
 };
 
-#endif //MY_WEB_SERVER_H
+#endif  // WEB_MY_WEB_SERVER_H_
