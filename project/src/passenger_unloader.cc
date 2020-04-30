@@ -14,6 +14,15 @@ int PassengerUnloader::UnloadPassengers(std::list<Passenger *>* passengers,
       it != passengers->end();
       it++) {
     if ((*it)->GetDestination() == current_stop->GetId()) {
+      std::ostringstream log_output;
+      std::ostringstream formatted_log;
+      (*it)->Report(log_output);
+      std::cout << log_output.str();
+      FileWriter *temp = temp->GetInstance();
+      formatted_log = temp->ProcessOutputStream(log_output);
+      temp->WriteStream(passenger_stats_file_name_, formatted_log);
+
+
       // could be used to inform scheduler of end-of-life?
       // This could be a destructor issue as well.
       // *it->FinalUpdate();

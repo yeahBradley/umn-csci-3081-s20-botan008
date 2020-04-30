@@ -97,6 +97,9 @@ void VisualizationSimulator::Update() {
         std::cout << "~~~~~~~~~ Updating busses ";
         std::cout << "~~~~~~~~~" << std::endl;
 
+        std::ostringstream log_output;
+        std::ostringstream formatted_log;
+
         // Update busses
         for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
             busses_[i]->Update();
@@ -109,7 +112,11 @@ void VisualizationSimulator::Update() {
 
             webInterface_->UpdateBus(busses_[i]->GetBusData());
 
-            busses_[i]->Report(std::cout);
+            busses_[i]->Report(log_output);
+            std::cout << log_output.str();
+            FileWriter *temp = temp->GetInstance();
+            formatted_log = temp->ProcessOutputStream(log_output);
+            temp->WriteStream(bus_stats_file_name_, formatted_log);
         }
 
         std::cout << "~~~~~~~~~ Updating routes ";

@@ -33,6 +33,13 @@ class Bus : public IObservable {
   Bus(std::string name, Route * out, Route * in, int capacity = 60,
                                                  double speed = 1);
   bool IsTripComplete();
+  /**
+   * @brief LoadPassenger: Load's a passenger onto the bus from the stop. Now keeps count of the passengers added.
+   * 
+   * @param[in] Passenger * : pointer to a single passenger object that will be loaded onto the bus
+   * 
+   * @return bool: the bool flag communicates whether a passenger was successfully added to the bus
+   */
   bool LoadPassenger(Passenger *);  // returning revenue delta
   bool Move();
   void Update();
@@ -69,5 +76,7 @@ class Bus : public IObservable {
 
   // Vis data for bus
   BusData bus_data_;
+
+  int total_num_of_passengers_;
 };
 #endif  // SRC_BUS_H_
