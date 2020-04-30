@@ -8,6 +8,7 @@
 
 #include "web_code/web/web_interface.h"
 #include "src/config_manager.h"
+#include "src/file_writer.h"
 
 class Route;
 class Bus;
@@ -36,6 +37,9 @@ class VisualizationSimulator {
          */
         void Pause();
         void Start(const std::vector<int>&, const int&);
+        /**
+         * @brief Update tics every element of the simulation forward in time
+         */
         void Update();
 
  private:
@@ -52,6 +56,7 @@ class VisualizationSimulator {
 
         int busId = 1000;
         bool isPaused = false;
+        std::string bus_stats_file_name_ = "BusData.csv";
 };
 
 #endif  // WEB_VISUALIZATION_SIMULATOR_H_

@@ -19,3 +19,7 @@ docs/latex
 
 # Adding an ignore for .nfs files that appear randomly
 .nfs*
+
+# Adding Iter3 log files to the ignore list
+BusData.csv
+PassData.csv

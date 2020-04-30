@@ -3,3 +3,6 @@ external
 
 # OSX automatically includes these, so ignore them as well.
 .DS_Store
+
+# Ignore .vscode file in this directory
+.vscode
