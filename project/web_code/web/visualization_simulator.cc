@@ -84,8 +84,9 @@ void VisualizationSimulator::Update() {
                   inbound->Clone(), 1);
 
                 BusColorDecorator* newColorBus = new BusColorDecorator(newBus);
+                BusIntensityDecorator* newIntensityBus = new BusIntensityDecorator(newColorBus);
 
-                busses_.push_back(newColorBus);
+                busses_.push_back(newIntensityBus);
                 //   strategyBusFactory.GenerateBus(
                 //   std::to_string(busId), outbound->Clone(),
                 //   inbound->Clone(), 1)

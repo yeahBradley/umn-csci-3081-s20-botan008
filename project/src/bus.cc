@@ -59,8 +59,12 @@ bool Bus::IsOutgoingRouteComplete() {
   return outgoing_route_->IsAtEnd();
 }
 
-void Bus::SetColor(Color color) {
-  bus_data_.color = color;
+// void Bus::SetColor(Color color) {
+//   bus_data_.color = color;
+// }
+
+void Bus::SetBusData(BusData newBusData) {
+  bus_data_ = newBusData;
 }
 
 bool Bus::Move() {

@@ -10,6 +10,7 @@
  * Includes
  ******************************************************************************/
 #include "src/i_bus_decorator.h"
+#include "src/i_bus.h"
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
@@ -18,7 +19,7 @@
  */
 class BusColorDecorator : public IBusDecorator {
  protected:
-    Bus *wrapped_bus_;
+    IBus *wrapped_bus_;
 
  public:
     /**
@@ -26,7 +27,7 @@ class BusColorDecorator : public IBusDecorator {
      * 
      * @param[in] Bus* baseBus : pointer to the base bus object that will be decorated by this class
      */
-    BusColorDecorator(Bus* baseBus) : wrapped_bus_(baseBus) {}
+    BusColorDecorator(IBus* baseBus) : wrapped_bus_(baseBus) {}
     
     bool IsTripComplete() {return wrapped_bus_->IsTripComplete();}
     bool LoadPassenger(Passenger* pass) {return wrapped_bus_->LoadPassenger(pass);}
@@ -34,15 +35,25 @@ class BusColorDecorator : public IBusDecorator {
     /**
      * @brief SetColor: The decorator uses this method to change the color of its base bus
      */
-    void SetColor(Color color) {
-        Color maroon{178,34,34,255};
-        Color gold{197,179,88,255};
-
+    void SetColor() {
+        BusData currentBusData = wrapped_bus_->GetBusData();
         if (wrapped_bus_->IsOutgoingRouteComplete()) {
-            wrapped_bus_->SetColor(gold);
+            currentBusData.color.red = 197;
+            currentBusData.color.green = 179;
+            currentBusData.color.blue = 88;
+            wrapped_bus_->SetBusData(currentBusData);
         } else {
-            wrapped_bus_->SetColor(maroon);
-        }   
+            currentBusData.color.red = 178;
+            currentBusData.color.green = 34;
+            currentBusData.color.blue = 34;
+            wrapped_bus_->SetBusData(currentBusData);
+        } 
+    }
+    /**
+     * @brief SetBusData: This, along with the preexisting GetBusData is what allows the BusColorDecorator to change the color.
+     */
+    void SetBusData(BusData newBusData) {
+        wrapped_bus_->SetBusData(newBusData);
     }
     bool Move() {return wrapped_bus_->Move();}
     /**
@@ -50,8 +61,7 @@ class BusColorDecorator : public IBusDecorator {
      * 
      */
     void Update() {
-        Color white{255,255,255,255};
-        this->SetColor(white);
+        this->SetColor();
         wrapped_bus_->Update();
     }
     void Report(std::ostream& ostr) {wrapped_bus_->Report(ostr);}
