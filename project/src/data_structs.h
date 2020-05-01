@@ -6,33 +6,65 @@
 
 #ifndef SRC_DATA_STRUCTS_H_
 #define SRC_DATA_STRUCTS_H_
-
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include <vector>
+/*******************************************************************************
+ * Struct Definitions
+ ******************************************************************************/
 
-
+/**
+ * @brief Position: 
+ */
 struct Position {
+    Position(int x, int y): x(x), y(y) {}
     Position() : x(0), y(0) {}
     float x;
     float y;
 };
-
+/**
+ * @brief Color: 
+ */
+struct Color {
+    Color(int r=0, int g=0, int b=0, int a=255): 
+        red(r), green(g), blue(b), alpha(a) {}
+    int red;
+    int green;
+    int blue;
+    int alpha;
+};
+/**
+ * @brief BusData: 
+ */
 struct BusData {
-    BusData() : id(""), position(Position()), num_passengers(0), capacity(0) {}
+    BusData(std::string id, Color color, Position pos, int n_pass, int cap):
+        id(id), position(pos), num_passengers(n_pass), capacity(cap), color(color) {}
+    BusData() : id(""), position(Position()), num_passengers(0), capacity(0), color() {}
     std::string id;
     Position position;
     int num_passengers;
     int capacity;
+    Color color;
 };
-
+/**
+ * @brief StopData:
+ */
 struct StopData {
+    StopData(std::string id, Position pos , int n_peeps):
+        id(id), position(pos), num_people(n_peeps) {}
     StopData() : id(""), position(Position()), num_people(0) {}
     std::string id;
     Position position;
     int num_people;
 };
-
+/**
+ * @brief RouteData: 
+ */
 struct RouteData {
+    RouteData(std::string id) :
+        id(id), stops(std::vector<StopData>(0)) {}
     RouteData() : id(""), stops(std::vector<StopData>(0)) {}
     std::string id;
     std::vector<StopData> stops;

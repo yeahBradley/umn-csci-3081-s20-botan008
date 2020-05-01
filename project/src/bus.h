@@ -11,7 +11,8 @@
 #include <list>
 #include <string>
 
-#include "src/i_observable.h"
+
+#include "src/i_bus.h"
 #include "src/data_structs.h"
 #include "src/passenger.h"
 #include "src/passenger_loader.h"
@@ -28,7 +29,7 @@ enum BusType {
   BT_SMALL = 30, BT_REGULAR = 60, BT_LARGE = 90
 };
 
-class Bus : public IObservable {
+class Bus : public IBus {
  public:
   Bus(std::string name, Route * out, Route * in, int capacity = 60,
                                                  double speed = 1);
@@ -40,10 +41,14 @@ class Bus : public IObservable {
    * 
    * @return bool: the bool flag communicates whether a passenger was successfully added to the bus
    */
-  bool LoadPassenger(Passenger *);  // returning revenue delta
+  bool LoadPassenger(Passenger * pass);  // returning revenue delta
+  //new
+  bool IsOutgoingRouteComplete();
+  //new
+  void SetColor(Color color);
   bool Move();
   void Update();
-  void virtual Report(std::ostream&);
+  void Report(std::ostream&);
 
   // Vis Getters
   void UpdateBusData();

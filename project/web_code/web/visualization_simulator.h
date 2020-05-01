@@ -9,6 +9,9 @@
 #include "web_code/web/web_interface.h"
 #include "src/config_manager.h"
 #include "src/file_writer.h"
+#include "src/i_bus.h"
+#include "src/i_bus_decorator.h"
+#include "src/bus_color_decorator.h"
 
 class Route;
 class Bus;
@@ -52,7 +55,7 @@ class VisualizationSimulator {
         int simulationTimeElapsed_;
 
         std::vector<Route *> prototypeRoutes_;
-        std::vector<Bus *> busses_;
+        std::vector<IBus *> busses_;
 
         int busId = 1000;
         bool isPaused = false;

@@ -125,7 +125,7 @@ function setupSocket() {
 
                             var newStop = new Stop(stop_id, position, numPeople);
                             stops.push(newStop);
-                            stopDropDown.option(newStop.id)
+                            stopDropDown.option(newStop.id);
 
                             route_stop_indices.push(stops.length-1);
                         } else {
@@ -250,7 +250,7 @@ function update() {
 
 	// Only update every specified timestep
     elapsedTime = millis() - startTime;
-    if (elapsedTime > updateTime && totalUpdates <= numTimeSteps) {
+    if (elapsedTime > updateTime && totalUpdates <= numTimeSteps && !paused) {
         socket.send(JSON.stringify({command: "update"}));
         startTime = millis();
         totalUpdates++;
@@ -366,6 +366,7 @@ function dropDownSelect() {
     let item = stopDropDown.value();
     socket.send(JSON.stringify({command: "listenStop", id: item}))
 }
+
 function pause() {
     console.log("Pause button clicked");
 
