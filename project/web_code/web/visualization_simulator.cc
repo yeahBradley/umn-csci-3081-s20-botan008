@@ -79,10 +79,17 @@ void VisualizationSimulator::Update() {
                 Route * outbound = prototypeRoutes_[2 * i];
                 Route * inbound = prototypeRoutes_[2 * i + 1];
 
-
-                busses_.push_back(strategyBusFactory.GenerateBus(
+                Bus* newBus = strategyBusFactory.GenerateBus(
                   std::to_string(busId), outbound->Clone(),
-                  inbound->Clone(), 1));
+                  inbound->Clone(), 1);
+
+                BusColorDecorator* newColorBus = new BusColorDecorator(newBus);
+
+                busses_.push_back(newColorBus);
+                //   strategyBusFactory.GenerateBus(
+                //   std::to_string(busId), outbound->Clone(),
+                //   inbound->Clone(), 1)
+                //   );
                 // busses_.push_back(new Bus(std::to_string(busId),
                 //   outbound->Clone(), inbound->Clone(), 60, 1));
 
@@ -102,6 +109,15 @@ void VisualizationSimulator::Update() {
 
         // Update busses
         for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+            // Color maroon{178,34,34,255};
+            // Color gold{197,179,88,255};
+
+            // if (busses_[i]->IsOutgoingRouteComplete()) {
+            //     busses_[i]->SetColor(gold);
+            // } else {
+            //     busses_[i]->SetColor(maroon);
+            // }
+
             busses_[i]->Update();
 
             if (busses_[i]->IsTripComplete()) {

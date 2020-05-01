@@ -21,6 +21,7 @@ Bus::Bus(std::string name, Route * out, Route * in,
   loader_ = new PassengerLoader;
   UpdateBusData();
   total_num_of_passengers_ = 0;
+  bus_data_.color = {255, 255, 255, 255};
 }
 
 bool Bus::IsTripComplete() {
@@ -50,6 +51,18 @@ bool Bus::LoadPassenger(Passenger * new_passenger) {
 // How many states are possible for the bus and stops and passengers?
 // A bus can be between stops or at a stop. (2 states for move)
 // If it's between stops, then CanMove() returns true
+
+/**
+ * @brief IsOutgoingRouteComplete: 
+ */
+bool Bus::IsOutgoingRouteComplete() {
+  return outgoing_route_->IsAtEnd();
+}
+
+void Bus::SetColor(Color color) {
+  bus_data_.color = color;
+}
+
 bool Bus::Move() {
   // cout << count++ << "_Entering Bus::Move()" << endl;
 
@@ -213,6 +226,10 @@ void Bus::UpdateBusData() {
 
   // Get the correct route and early exit
   Route * current_route = outgoing_route_;
+
+  Color maroon{128, 0, 0, 255};
+  Color gold{197, 179, 88, 255};
+
   if (outgoing_route_->IsAtEnd()) {
     if (incoming_route_->IsAtEnd()) { return; }
     current_route = incoming_route_;
