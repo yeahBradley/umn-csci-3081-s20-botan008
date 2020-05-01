@@ -42,10 +42,16 @@ class Bus : public IBus {
    * @return bool: the bool flag communicates whether a passenger was successfully added to the bus
    */
   bool LoadPassenger(Passenger * pass);  // returning revenue delta
-  //new
+  /**
+   * @brief IsOutgoingRouteComplete: Checks if the outgoing has been completed
+   * 
+   * @return bool: The return type is a boollean flag.
+   */
   bool IsOutgoingRouteComplete();
-  //new
-  void SetColor(Color color);
+  /**
+   * @brief SetBusData: This, along with the preexisting GetBusData is what allows the BusColorDecorator to change the color.
+   */
+  void SetBusData(BusData newBusData);
   bool Move();
   void Update();
   void Report(std::ostream&);

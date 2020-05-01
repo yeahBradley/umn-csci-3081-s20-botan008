@@ -12,6 +12,7 @@
 #include "src/i_bus.h"
 #include "src/i_bus_decorator.h"
 #include "src/bus_color_decorator.h"
+#include "src/bus_intensity_decorator.h"
 
 class Route;
 class Bus;

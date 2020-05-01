@@ -28,7 +28,7 @@ class IBus : public IObservable {
     virtual bool IsTripComplete() = 0;
     virtual bool LoadPassenger(Passenger * pass) = 0;
     virtual bool IsOutgoingRouteComplete() = 0;
-    virtual void SetColor(Color color) = 0;
+    virtual void SetBusData(BusData newBusData) = 0;
     virtual bool Move() = 0;
     virtual void Update() = 0;
     virtual void Report(std::ostream& ostr) = 0;
