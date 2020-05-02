@@ -26,19 +26,19 @@ class IObservable {
  * @param[in] IObserver* observer: Pointer to an Observer object that is taken in to be registered
  *
  */
-  void RegisterObserver(IObserver * observer);
+  virtual void RegisterObserver(IObserver * observer);
 /**
  * @brief ClearObservers removes all the observers that are registered by the subject
  *
  */
-  void ClearObservers();
+  virtual void ClearObservers();
 /**
  * @brief NotifyObservers broadcasts BusData to the registered observers
  *
  * @param[in] BusData busData: Pointer to a BusData struct for one bus that contains the data the observers want
  *
  */
-  void NotifyObservers(BusData * busData);
+  virtual void NotifyObservers(BusData * busData);
 
  private:
   std::vector<IObserver *> observer_;

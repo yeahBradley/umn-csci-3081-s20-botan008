@@ -2,9 +2,6 @@
 
 #include <string>
 #include "web_code/web/visualization_simulator.h"
-#include "src/bus.h"
-#include "src/route.h"
-#include "src/bus_factories.h"
 
 VisualizationSimulator::VisualizationSimulator(WebInterface* webI,
   ConfigManager* configM) {
@@ -16,6 +13,10 @@ VisualizationSimulator::~VisualizationSimulator() {}
 
 void VisualizationSimulator::ClearListeners() {
     for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+        std::cout << "                " << std::endl;
+        std::cout << "                " << std::endl;
+        std::cout << "                " << std::endl;
+        std::cout << "                INSIDE VizualizationSimulator::ClearListeners" << std::endl;
         busses_[i]->ClearObservers();
     }
 }
@@ -23,6 +24,11 @@ void VisualizationSimulator::ClearListeners() {
 void VisualizationSimulator::AddListener(std::string* id, IObserver* observer) {
     for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
         if (busses_[i]->GetName() == *id) {
+            std::cout << "                " << std::endl;
+            std::cout << "                " << std::endl;
+            std::cout << "                " << std::endl;
+            std::cout << "                INSIDE VizualizationSimulator::AddListener" << std::endl;
+            std::cout << "                busses_.size() is : " << busses_.size() << std::endl;
             busses_[i]->RegisterObserver(observer);
         }
     }
