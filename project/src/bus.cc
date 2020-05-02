@@ -5,7 +5,6 @@
  */
 #include "src/bus.h"
 
-// using namespace std;
 // static int count = 1;
 
 Bus::Bus(std::string name, Route * out, Route * in,
@@ -20,6 +19,8 @@ Bus::Bus(std::string name, Route * out, Route * in,
   unloader_ = new PassengerUnloader;
   loader_ = new PassengerLoader;
   UpdateBusData();
+  total_num_of_passengers_ = 0;
+  bus_data_.color = {255, 255, 255, 255};
 }
 
 bool Bus::IsTripComplete() {
@@ -39,11 +40,25 @@ bool Bus::LoadPassenger(Passenger * new_passenger) {
   if (loader_->LoadPassenger(new_passenger, passenger_max_capacity_,
       &passengers_) == true) {
     added_passenger = true;
+    total_num_of_passengers_++;
     // revenue_ += 0; //No revenue tracking at this time.
   }
   return added_passenger;
 }
 
+/**
+ * @brief IsOutgoingRouteComplete: 
+ */
+bool Bus::IsOutgoingRouteComplete() {
+  return outgoing_route_->IsAtEnd();
+}
+
+/**
+ * @brief SetBusData: 
+ */
+void Bus::SetBusData(BusData newBusData) {
+  bus_data_ = newBusData;
+}
 // This method does WAY TOO MUCH!!! It needs to be made simpler.
 // How many states are possible for the bus and stops and passengers?
 // A bus can be between stops or at a stop. (2 states for move)
@@ -192,10 +207,11 @@ void Bus::Report(std::ostream& out) {
   out << "Name: " << name_ << std::endl;
   out << "Speed: " << speed_ << std::endl;
   out << "Distance to next stop: " << distance_remaining_ << std::endl;
-  out << "\tPassengers (" << passengers_.size() << "): " << std::endl;
+  out << "\tPassengers (" << passengers_.size() << "):" << std::endl;
+  out << "Total Num of Passengers: " << total_num_of_passengers_ << std::endl;
   for (std::list<Passenger *>::iterator it = passengers_.begin();
                                         it != passengers_.end(); it++) {
-    (*it)->Report(out);
+    (*it)->Report(std::cout);
   }
 }
 
@@ -210,6 +226,10 @@ void Bus::UpdateBusData() {
 
   // Get the correct route and early exit
   Route * current_route = outgoing_route_;
+
+  Color maroon{128, 0, 0, 255};
+  Color gold{197, 179, 88, 255};
+
   if (outgoing_route_->IsAtEnd()) {
     if (incoming_route_->IsAtEnd()) { return; }
     current_route = incoming_route_;

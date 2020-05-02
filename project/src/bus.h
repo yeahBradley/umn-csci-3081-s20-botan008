@@ -11,7 +11,8 @@
 #include <list>
 #include <string>
 
-#include "src/i_observable.h"
+
+#include "src/i_bus.h"
 #include "src/data_structs.h"
 #include "src/passenger.h"
 #include "src/passenger_loader.h"
@@ -28,15 +29,32 @@ enum BusType {
   BT_SMALL = 30, BT_REGULAR = 60, BT_LARGE = 90
 };
 
-class Bus : public IObservable {
+class Bus : public IBus {
  public:
   Bus(std::string name, Route * out, Route * in, int capacity = 60,
                                                  double speed = 1);
   bool IsTripComplete();
-  bool LoadPassenger(Passenger *);  // returning revenue delta
+  /**
+   * @brief LoadPassenger: Load's a passenger onto the bus from the stop. Now keeps count of the passengers added.
+   * 
+   * @param[in] Passenger * : pointer to a single passenger object that will be loaded onto the bus
+   * 
+   * @return bool: the bool flag communicates whether a passenger was successfully added to the bus
+   */
+  bool LoadPassenger(Passenger * pass);  // returning revenue delta
+  /**
+   * @brief IsOutgoingRouteComplete: Checks if the outgoing has been completed
+   * 
+   * @return bool: The return type is a boollean flag.
+   */
+  bool IsOutgoingRouteComplete();
+  /**
+   * @brief SetBusData: This, along with the preexisting GetBusData is what allows the BusColorDecorator to change the color.
+   */
+  void SetBusData(BusData newBusData);
   bool Move();
   void Update();
-  void virtual Report(std::ostream&);
+  void Report(std::ostream&);
 
   // Vis Getters
   void UpdateBusData();
@@ -69,5 +87,7 @@ class Bus : public IObservable {
 
   // Vis data for bus
   BusData bus_data_;
+
+  int total_num_of_passengers_;
 };
 #endif  // SRC_BUS_H_

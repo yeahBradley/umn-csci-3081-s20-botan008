@@ -42,8 +42,8 @@ var busTimeOffsetsYOffset = 50;
 var runRectYPos = 450;
 var runYPos = 465;
 var startYPos = 500;
-var observedBusText = "";
-var observedStopText = "";
+var observedText = ""
+
 // Data for vis. Matches data_structs.h in C++
 function Position(x, y) {
 	this.x = x;
@@ -74,10 +74,10 @@ function Route(id, stopIndices) {
 
 
 function setupSocket() {
-    try {
+    try {	    
 	// Handles commands sent up from C++
         socket.onmessage =function got_packet(msg) {
-
+            
             var data = JSON.parse(msg.data);
 
             if (data.command == "initRoutes") {
@@ -85,14 +85,14 @@ function setupSocket() {
                 initRouteSliders();
             }
             if (data.command == "updateBusses") {
-
+                
                 busses = [];
 
                 for (let i = 0; i < data.busses.length; i++) {
                     id = data.busses[i].id;
                     numPassengers = data.busses[i].numPassengers;
                     capacity = data.busses[i].capacity;
-
+                    
                     x = data.busses[i].position.x;
                     y = data.busses[i].position.y;
                     position = new Position(x, y);
@@ -104,9 +104,9 @@ function setupSocket() {
                 }
             }
             if (data.command == "updateRoutes") {
-
+                
                 routes = [];
-
+                
                 for (let i = 0; i < data.routes.length; i++) {
                     id = data.routes[i].id;
 
@@ -114,7 +114,7 @@ function setupSocket() {
 
                     for (let j = 0; j < data.routes[i].stops.length; j++) {
                         stop_id = data.routes[i].stops[j].id;
-
+                        
                         let index = stops.findIndex(x => x.id == stop_id);
                         if (index == -1) {
                             numPeople = data.routes[i].stops[j].numPeople;
@@ -123,9 +123,7 @@ function setupSocket() {
                             y = data.routes[i].stops[j].position.y;
                             position = new Position(x, y);
 
-                            var newStop = new Stop(stop_id, position, numPeople);
-                            stops.push(newStop);
-                            stopDropDown.option(newStop.id);
+                            stops.push(new Stop(stop_id, position, numPeople));
 
                             route_stop_indices.push(stops.length-1);
                         } else {
@@ -136,15 +134,12 @@ function setupSocket() {
                     routes.push(new Route(id, route_stop_indices));
                 }
             }
-            if (data.command == "observeBus") {
-                observedBusText = data.text;
-            } 
-            if (data.command == "observeStop") {
-                observedStopText = data.text;
+            if (data.command == "observe") {
+                observedText = data.text;
             }
-        }
+        } 
     } catch(exception) {
-        alert('<p>Error' + exception);
+        alert('<p>Error' + exception);  
     }
 
     connected = false;
@@ -161,11 +156,11 @@ function mapClick(event) {
         var pos = myMap.latLngToPixel(busses[i].position.x, busses[i].position.y);
         pos.x = pos.x + imageX;
         pos.y = pos.y + imageY;
-
+        
         // If we are over the bus
         if (abs(mouseX - pos.x) < 25 && abs(mouseY - pos.y) < 15) {
             console.log("hit!!!");
-            socket.send(JSON.stringify({command: "listenBus", id: busses[i].id}));
+            socket.send(JSON.stringify({command: "listen", id: busses[i].id}));
             return;
         }
     }
@@ -180,11 +175,11 @@ function mapClick(event) {
 function setup() {
     socket = new WebSocket("ws://" + location.hostname+(location.port ? ':'+location.port: ''), "web_server");
     setupSocket();
-
+    
     busses = [];
     stops  = [];
     routes = [];
-
+    
     canvas = createCanvas(windowWidth, windowHeight);
 
     textSize(12);
@@ -197,13 +192,7 @@ function setup() {
     startButton.position(10, startYPos);
     startButton.style('width', '100px');
     startButton.style('height', '20px');
-    startButton.mousePressed(start);
-
-    stopDropDown = createSelect();  // new from lab 17
-    stopDropDown.position(10, startYPos + 30);
-    stopDropDown.style('width', '200px');
-    stopDropDown.style('height', '20px');
-    stopDropDown.changed(dropDownSelect)
+    startButton.mousePressed(start);    
 
     pauseButton = createButton('Pause');
     pauseButton.position(110, startYPos);
@@ -250,7 +239,7 @@ function update() {
 
 	// Only update every specified timestep
     elapsedTime = millis() - startTime;
-    if (elapsedTime > updateTime && totalUpdates <= numTimeSteps && !paused) {
+    if (elapsedTime > updateTime && totalUpdates <= numTimeSteps) {
         socket.send(JSON.stringify({command: "update"}));
         startTime = millis();
         totalUpdates++;
@@ -260,8 +249,8 @@ function update() {
 function render() {
     clear();
 
-    image(mapImg, imageX, imageY);
-
+    image(mapImg, imageX, imageY); 
+   
     push();
     stroke(0);
     // Draw Routes
@@ -354,17 +343,12 @@ function start() {
     for (let i = 0; i < busTimeOffsetsSliders.length; i++) {
         busTimeOffsets[i] = busTimeOffsetsSliders[i].value();
     }
-
+    
     numTimeSteps = numTimeStepsSlider.value();
     socket.send(JSON.stringify({command: "start", numTimeSteps: numTimeSteps, timeBetweenBusses: busTimeOffsets}));
     started = true;
     elapsedTime = millis();
     startTime = millis();
-}
-
-function dropDownSelect() {
-    let item = stopDropDown.value();
-    socket.send(JSON.stringify({command: "listenStop", id: item}))
 }
 
 function pause() {
@@ -383,13 +367,13 @@ function pause() {
 
 
 function initRouteSliders() {
-
+    
     for (let i = 0; i < numRoutes; i++) {
         busTimeOffsetsSliders[i] = createSlider(1, 10, 5, 1);
         busTimeOffsetsSliders[i].position(10, busTimeOffsetsYInitPos + busTimeOffsetsYOffset * i);
         busTimeOffsetsSliders[i].style('width', '200px');
     }
-
+	
 }
 
 function drawInfo() {
@@ -398,7 +382,7 @@ function drawInfo() {
         var pos = myMap.latLngToPixel(busses[i].position.x, busses[i].position.y);
         pos.x = pos.x + imageX;
         pos.y = pos.y + imageY;
-
+        
         // If we are over the bus
         if (abs(mouseX - pos.x) < 25 && abs(mouseY - pos.y) < 15) {
             fill(0, 0, 0, 50);
@@ -427,5 +411,5 @@ function drawInfo() {
 
 
 function drawObservedInfo() {
-    text(observedBusText + observedStopText,1+imageWidth+270+5, simInfoYRectPos+200);
+    text(observedText,1+imageWidth+270+5, simInfoYRectPos+200);
 }

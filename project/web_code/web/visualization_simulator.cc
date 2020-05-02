@@ -2,9 +2,6 @@
 
 #include <string>
 #include "web_code/web/visualization_simulator.h"
-#include "src/bus.h"
-#include "src/route.h"
-#include "src/bus_factories.h"
 
 VisualizationSimulator::VisualizationSimulator(WebInterface* webI,
   ConfigManager* configM) {
@@ -14,18 +11,79 @@ VisualizationSimulator::VisualizationSimulator(WebInterface* webI,
 
 VisualizationSimulator::~VisualizationSimulator() {}
 
-void VisualizationSimulator::ClearListeners() {
+void VisualizationSimulator::ClearBusListeners() {
     for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+        std::cout << "                " << std::endl;
+        std::cout << "                " << std::endl;
+        std::cout << "                " << std::endl;
+        std::cout << "                INSIDE VizualizationSimulator::ClearBusListeners" << std::endl;
         busses_[i]->ClearObservers();
     }
 }
 
-void VisualizationSimulator::AddListener(std::string* id, IObserver* observer) {
+void VisualizationSimulator::AddBusListener(std::string* id, IObserver<BusData*>* observer) {
     for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
         if (busses_[i]->GetName() == *id) {
+            std::cout << "                " << std::endl;
+            std::cout << "                " << std::endl;
+            std::cout << "                " << std::endl;
+            std::cout << "                INSIDE VizualizationSimulator::AddBusListener" << std::endl;
+            std::cout << "                busses_.size() is : " << busses_.size() << std::endl;
             busses_[i]->RegisterObserver(observer);
         }
     }
+}
+
+void VisualizationSimulator::ClearStopListeners() {
+    for (int i = static_cast<int>(prototypeRoutes_.size()) - 1; i >= 0; i--) {
+        std::list<Stop *> stops_ = prototypeRoutes_[i]->GetStops();
+
+        for (std::list<Stop *>::iterator it = stops_.begin(); it != stops_.end(); it++) {
+            (*it)->ClearObservers();
+        }
+
+        // for (int i = static_cast<int>(stops.size()) - 1; i >= 0; i--) {
+        //     stops[i]->ClearObservers();
+        // }
+    }
+
+    // for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+    //     std::cout << "                " << std::endl;
+    //     std::cout << "                " << std::endl;
+    //     std::cout << "                " << std::endl;
+    //     std::cout << "                INSIDE VizualizationSimulator::ClearBusListeners" << std::endl;
+    //     busses_[i]->ClearObservers();
+    // }
+}
+
+void VisualizationSimulator::AddStopListener(std::string* id, IObserver<StopData*>* observer) {
+    for (int i = static_cast<int>(prototypeRoutes_.size()) - 1; i >= 0; i--) {
+        std::list<Stop *> stops_ = prototypeRoutes_[i]->GetStops();
+
+        for (std::list<Stop *>::iterator it = stops_.begin(); it != stops_.end(); it++) {
+            if (std::to_string((*it)->GetId()) == *id) {
+                (*it)->RegisterObserver(observer);
+            }
+        }
+
+
+        // for (int i = static_cast<int>(stops.size()) - 1; i >= 0; i--) {
+        //     if (std::to_string(stops[i]->GetId()) == *id ) {
+        //         stops[i]->RegisterObserver(observer);
+        //     }
+        // }
+
+    }
+    // for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+    //     if (busses_[i]->GetName() == *id) {
+    //         std::cout << "                " << std::endl;
+    //         std::cout << "                " << std::endl;
+    //         std::cout << "                " << std::endl;
+    //         std::cout << "                INSIDE VizualizationSimulator::AddBusListener" << std::endl;
+    //         std::cout << "                busses_.size() is : " << busses_.size() << std::endl;
+    //         busses_[i]->RegisterObserver(observer);
+    //     }
+    // }
 }
 
 void VisualizationSimulator::Pause() {
@@ -79,10 +137,18 @@ void VisualizationSimulator::Update() {
                 Route * outbound = prototypeRoutes_[2 * i];
                 Route * inbound = prototypeRoutes_[2 * i + 1];
 
-
-                busses_.push_back(strategyBusFactory.GenerateBus(
+                Bus* newBus = strategyBusFactory.GenerateBus(
                   std::to_string(busId), outbound->Clone(),
-                  inbound->Clone(), 1));
+                  inbound->Clone(), 1);
+
+                BusColorDecorator* newColorBus = new BusColorDecorator(newBus);
+                BusIntensityDecorator* newIntensityBus = new BusIntensityDecorator(newColorBus);
+
+                busses_.push_back(newIntensityBus);
+                //   strategyBusFactory.GenerateBus(
+                //   std::to_string(busId), outbound->Clone(),
+                //   inbound->Clone(), 1)
+                //   );
                 // busses_.push_back(new Bus(std::to_string(busId),
                 //   outbound->Clone(), inbound->Clone(), 60, 1));
 
@@ -97,8 +163,20 @@ void VisualizationSimulator::Update() {
         std::cout << "~~~~~~~~~ Updating busses ";
         std::cout << "~~~~~~~~~" << std::endl;
 
+        std::ostringstream log_output;
+        std::ostringstream formatted_log;
+
         // Update busses
         for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+            // Color maroon{178,34,34,255};
+            // Color gold{197,179,88,255};
+
+            // if (busses_[i]->IsOutgoingRouteComplete()) {
+            //     busses_[i]->SetColor(gold);
+            // } else {
+            //     busses_[i]->SetColor(maroon);
+            // }
+
             busses_[i]->Update();
 
             if (busses_[i]->IsTripComplete()) {
@@ -109,7 +187,11 @@ void VisualizationSimulator::Update() {
 
             webInterface_->UpdateBus(busses_[i]->GetBusData());
 
-            busses_[i]->Report(std::cout);
+            busses_[i]->Report(log_output);
+            std::cout << log_output.str();
+            FileWriter *temp = temp->GetInstance();
+            formatted_log = temp->ProcessOutputStream(log_output);
+            temp->WriteStream(bus_stats_file_name_, formatted_log);
         }
 
         std::cout << "~~~~~~~~~ Updating routes ";

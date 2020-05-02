@@ -18,6 +18,7 @@
  * @brief IObservable allows derived classes to be observable by the IObserver class
  *
  */
+template <typename T>
 class IObservable {
  public:
 /**
@@ -26,22 +27,22 @@ class IObservable {
  * @param[in] IObserver* observer: Pointer to an Observer object that is taken in to be registered
  *
  */
-  void RegisterObserver(IObserver * observer);
+  virtual void RegisterObserver(IObserver<T> * observer);
 /**
  * @brief ClearObservers removes all the observers that are registered by the subject
  *
  */
-  void ClearObservers();
+  virtual void ClearObservers();
 /**
  * @brief NotifyObservers broadcasts BusData to the registered observers
  *
  * @param[in] BusData busData: Pointer to a BusData struct for one bus that contains the data the observers want
  *
  */
-  void NotifyObservers(BusData * busData);
+  virtual void NotifyObservers(T busData);
 
  private:
-  std::vector<IObserver *> observer_;
+  std::vector<IObserver<T> *> observer_;
 };
 
 #endif  // SRC_I_OBSERVABLE_H_
