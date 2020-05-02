@@ -40,7 +40,7 @@ class Stop : public IObservable<StopData*> {
   int id_;
   std::list<Passenger *> passengers_;  // considered array, vector, queue, list
   double longitude_;
-  double latitude_; 
+  double latitude_;
   StopData stop_data_;
   // are we using long/lat coords?
   // derived information - not needed depending on passengers_

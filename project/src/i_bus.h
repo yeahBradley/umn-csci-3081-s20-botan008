@@ -42,4 +42,4 @@ class IBus : public IObservable<BusData*> {
  private:
 };
 
- #endif  // SRC_I_BUS_H
+#endif  // SRC_I_BUS_H_

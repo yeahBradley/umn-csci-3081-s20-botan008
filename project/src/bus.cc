@@ -20,7 +20,10 @@ Bus::Bus(std::string name, Route * out, Route * in,
   loader_ = new PassengerLoader;
   UpdateBusData();
   total_num_of_passengers_ = 0;
-  bus_data_.color = {255, 255, 255, 255};
+  bus_data_.color.red = 255;
+  bus_data_.color.green = 255;
+  bus_data_.color.blue = 255;
+  bus_data_.color.alpha = 255;
 }
 
 bool Bus::IsTripComplete() {

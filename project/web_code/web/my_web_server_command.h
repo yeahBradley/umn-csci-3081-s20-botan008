@@ -16,7 +16,7 @@ class MyWebServerSessionState;
 class MyWebServerCommand {
  public:
   virtual ~MyWebServerCommand() {}
-  virtual void execute(MyWebServerSession* session, picojson::value& command,
+  virtual void execute(MyWebServerSession* session, picojson::value& command,  // NOLINT
     MyWebServerSessionState* state) = 0;
 };
 
