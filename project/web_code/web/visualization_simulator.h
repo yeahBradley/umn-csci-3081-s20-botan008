@@ -9,6 +9,7 @@
 #include "web_code/web/web_interface.h"
 #include "src/config_manager.h"
 #include "src/file_writer.h"
+#include "src/bus_factories.h"
 #include "src/i_bus.h"
 #include "src/i_bus_decorator.h"
 #include "src/bus_color_decorator.h"

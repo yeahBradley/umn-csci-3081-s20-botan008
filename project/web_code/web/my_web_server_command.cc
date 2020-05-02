@@ -153,6 +153,10 @@ class BusWebObserver : public IObserver {
 
     // This normally called update, but we call it Notify as per the lab writeup
     void Notify(BusData* info) {
+        std::cout << "                " << std::endl;
+        std::cout << "                " << std::endl;
+        std::cout << "                " << std::endl;
+        std::cout << "                INSIDE BusWebObserver::Notify" << std::endl;
         picojson::object data;
         data["command"] = picojson::value("observe");
         std::stringstream ss;

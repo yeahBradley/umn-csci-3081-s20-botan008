@@ -5,7 +5,6 @@
  */
 #include "src/bus.h"
 
-// using namespace std;
 // static int count = 1;
 
 Bus::Bus(std::string name, Route * out, Route * in,
@@ -47,11 +46,6 @@ bool Bus::LoadPassenger(Passenger * new_passenger) {
   return added_passenger;
 }
 
-// This method does WAY TOO MUCH!!! It needs to be made simpler.
-// How many states are possible for the bus and stops and passengers?
-// A bus can be between stops or at a stop. (2 states for move)
-// If it's between stops, then CanMove() returns true
-
 /**
  * @brief IsOutgoingRouteComplete: 
  */
@@ -59,14 +53,16 @@ bool Bus::IsOutgoingRouteComplete() {
   return outgoing_route_->IsAtEnd();
 }
 
-// void Bus::SetColor(Color color) {
-//   bus_data_.color = color;
-// }
-
+/**
+ * @brief SetBusData: 
+ */
 void Bus::SetBusData(BusData newBusData) {
   bus_data_ = newBusData;
 }
-
+// This method does WAY TOO MUCH!!! It needs to be made simpler.
+// How many states are possible for the bus and stops and passengers?
+// A bus can be between stops or at a stop. (2 states for move)
+// If it's between stops, then CanMove() returns true
 bool Bus::Move() {
   // cout << count++ << "_Entering Bus::Move()" << endl;
 
