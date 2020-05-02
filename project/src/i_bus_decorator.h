@@ -34,6 +34,8 @@ class IBusDecorator : public IBus {
     virtual Stop * GetNextStop() const = 0;
     virtual size_t GetNumPassengers() const = 0;
     virtual int GetCapacity() const = 0;
+    virtual void RegisterObserver(IObservable<T1> observer);
+    virtual void ClearObservers();
 
  private:
 };

@@ -73,6 +73,8 @@ class BusColorDecorator : public IBusDecorator {
     Stop * GetNextStop() const {return wrapped_bus_->GetNextStop();}
     size_t GetNumPassengers() const {return wrapped_bus_->GetNumPassengers();}
     int GetCapacity() const {return wrapped_bus_->GetCapacity();}
+    void RegisterObserver(IObservable<T1> observer) {wrapped_bus_->RegisterObserver(observer);}
+    void ClearObservers() {wrapped_bus_->ClearObservers()}
 
  private:
 };
