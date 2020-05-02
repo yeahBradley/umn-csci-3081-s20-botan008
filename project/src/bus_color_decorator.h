@@ -37,9 +37,9 @@ class BusColorDecorator : public IBusDecorator {
     void SetColor() {
         BusData currentBusData = wrapped_bus_->GetBusData();
         if (wrapped_bus_->IsOutgoingRouteComplete()) {
-            currentBusData.color.red = 197;
-            currentBusData.color.green = 179;
-            currentBusData.color.blue = 88;
+            currentBusData.color.red = 212;
+            currentBusData.color.green = 175;
+            currentBusData.color.blue = 55;
             wrapped_bus_->SetBusData(currentBusData);
         } else {
             currentBusData.color.red = 178;
@@ -70,7 +70,7 @@ class BusColorDecorator : public IBusDecorator {
     Stop * GetNextStop() const {return wrapped_bus_->GetNextStop();}
     size_t GetNumPassengers() const {return wrapped_bus_->GetNumPassengers();}
     int GetCapacity() const {return wrapped_bus_->GetCapacity();}
-    void RegisterObserver(IObserver * observer) {wrapped_bus_->RegisterObserver(observer);}
+    void RegisterObserver(IObserver<BusData*> * observer) {wrapped_bus_->RegisterObserver(observer);}
     void ClearObservers() {wrapped_bus_->ClearObservers();}
 
  private:

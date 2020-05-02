@@ -24,18 +24,31 @@ class VisualizationSimulator {
         VisualizationSimulator(WebInterface*, ConfigManager*);
         ~VisualizationSimulator();
         /**
-         * @brief This method works in tandem with the back end observer pattern to clear registered busses
+         * @brief ClearBusListeners: This method works in tandem with the back end observer pattern to clear registered busses
          *
          */
         void ClearBusListeners();
         /**
-         * @brief This method works in tandem with the back end observer pattern to register the selected bus
+         * @brief AddBusListener: This method works in tandem with the back end observer pattern to register the selected bus
          *
          * @param[in] string* id: pointer to the name of the bus that will registered
-         * @param[in] IObserver* observer: pointer to the observer that will be registered with the subject
+         * @param[in] IObserver<BusData*>* observer: pointer to the observer that will be registered with the subject. Note that IObserver is a template class
          *
          */
-        void AddBusListener(std::string* id, IObserver* observer);
+        void AddBusListener(std::string* id, IObserver<BusData*>* observer);
+        /**
+         * @brief ClearStopListeners: This method works in tandem with the back end observer pattern to clear registered stops
+         *
+         */
+        void ClearStopListeners();
+        /**
+         * @brief This method works in tandem with the back end observer pattern to register the selected stop
+         *
+         * @param[in] string* id: pointer to the name of the bus that will registered
+         * @param[in] IObserver<StopData*>* observer: pointer to the observer that will be registered with the subject. Note that IObserver is a template class
+         *
+         */
+        void AddStopListener(std::string* id, IObserver<StopData*>* observer);
         /**
          * @brief A functioning pause button was added to the browser display
          *

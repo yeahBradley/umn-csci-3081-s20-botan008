@@ -17,6 +17,7 @@
  * @brief IObserver is a pure abstract class intended to observe one bus
  *
  */
+template <typename T>
 class IObserver {
  public:
 /**
@@ -25,7 +26,7 @@ class IObserver {
  * @param[in] BusData info: BusData struct for one bus that is currently being observed
  *
  */
-  virtual void Notify(BusData * info) = 0;
+  virtual void Notify(T info) = 0;
 };
 
 #endif  // SRC_I_OBSERVER_H_

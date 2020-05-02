@@ -23,7 +23,7 @@
 /**
  * @brief IBus : Interface for the bus class so that bus decorators can also be the same type.
  */
-class IBus : public IObservable {
+class IBus : public IObservable<BusData*> {
  public:
     virtual bool IsTripComplete() = 0;
     virtual bool LoadPassenger(Passenger * pass) = 0;

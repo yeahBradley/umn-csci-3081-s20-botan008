@@ -79,6 +79,15 @@ class AddBusListenerCommand: public MyWebServerCommand {
 VisualizationSimulator* mySim;
 };
 
+class AddStopListenerCommand: public MyWebServerCommand {
+ public:
+  explicit AddStopListenerCommand(VisualizationSimulator* sim);
+  void execute(MyWebServerSession* session, picojson::value& command,
+    MyWebServerSessionState* state) override;
+ private:
+VisualizationSimulator* mySim;
+};
+
 class InitRoutesCommand : public MyWebServerCommand {
  public:
   explicit InitRoutesCommand(ConfigManager* cm);

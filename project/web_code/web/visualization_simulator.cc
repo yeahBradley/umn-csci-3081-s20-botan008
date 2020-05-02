@@ -21,7 +21,7 @@ void VisualizationSimulator::ClearBusListeners() {
     }
 }
 
-void VisualizationSimulator::AddBusListener(std::string* id, IObserver* observer) {
+void VisualizationSimulator::AddBusListener(std::string* id, IObserver<BusData*>* observer) {
     for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
         if (busses_[i]->GetName() == *id) {
             std::cout << "                " << std::endl;
@@ -32,6 +32,58 @@ void VisualizationSimulator::AddBusListener(std::string* id, IObserver* observer
             busses_[i]->RegisterObserver(observer);
         }
     }
+}
+
+void VisualizationSimulator::ClearStopListeners() {
+    for (int i = static_cast<int>(prototypeRoutes_.size()) - 1; i >= 0; i--) {
+        std::list<Stop *> stops_ = prototypeRoutes_[i]->GetStops();
+
+        for (std::list<Stop *>::iterator it = stops_.begin(); it != stops_.end(); it++) {
+            (*it)->ClearObservers();
+        }
+
+        // for (int i = static_cast<int>(stops.size()) - 1; i >= 0; i--) {
+        //     stops[i]->ClearObservers();
+        // }
+    }
+
+    // for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+    //     std::cout << "                " << std::endl;
+    //     std::cout << "                " << std::endl;
+    //     std::cout << "                " << std::endl;
+    //     std::cout << "                INSIDE VizualizationSimulator::ClearBusListeners" << std::endl;
+    //     busses_[i]->ClearObservers();
+    // }
+}
+
+void VisualizationSimulator::AddStopListener(std::string* id, IObserver<StopData*>* observer) {
+    for (int i = static_cast<int>(prototypeRoutes_.size()) - 1; i >= 0; i--) {
+        std::list<Stop *> stops_ = prototypeRoutes_[i]->GetStops();
+
+        for (std::list<Stop *>::iterator it = stops_.begin(); it != stops_.end(); it++) {
+            if (std::to_string((*it)->GetId()) == *id) {
+                (*it)->RegisterObserver(observer);
+            }
+        }
+
+
+        // for (int i = static_cast<int>(stops.size()) - 1; i >= 0; i--) {
+        //     if (std::to_string(stops[i]->GetId()) == *id ) {
+        //         stops[i]->RegisterObserver(observer);
+        //     }
+        // }
+
+    }
+    // for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
+    //     if (busses_[i]->GetName() == *id) {
+    //         std::cout << "                " << std::endl;
+    //         std::cout << "                " << std::endl;
+    //         std::cout << "                " << std::endl;
+    //         std::cout << "                INSIDE VizualizationSimulator::AddBusListener" << std::endl;
+    //         std::cout << "                busses_.size() is : " << busses_.size() << std::endl;
+    //         busses_[i]->RegisterObserver(observer);
+    //     }
+    // }
 }
 
 void VisualizationSimulator::Pause() {
