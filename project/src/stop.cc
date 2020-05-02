@@ -12,6 +12,7 @@ Stop::Stop(int id, double longitude,
         double latitude) : id_(id), longitude_(longitude), latitude_(latitude) {
   // no initialization of list of passengers necessary
   passengers_.clear();
+  UpdateStopData();
 }
 
 int Stop::LoadPassengers(Bus * bus) {
@@ -48,6 +49,8 @@ void Stop::Update() {
                                     it != passengers_.end(); it++) {
     (*it)->Update();
   }
+  UpdateStopData();
+  NotifyObservers(&stop_data_);
 }
 
 int Stop::GetId() const {
@@ -61,4 +64,9 @@ void Stop::Report(std::ostream& out) const {
                                         it != passengers_.end(); it++) {
     (*it)->Report(out);
   }
+}
+
+void Stop::UpdateStopData() {
+  Position p {GetLongitude(), GetLatitude()};
+  stop_data_ = {std::to_string(GetId()), p, GetNumPassengersPresent()};
 }

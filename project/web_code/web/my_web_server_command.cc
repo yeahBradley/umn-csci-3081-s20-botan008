@@ -147,10 +147,10 @@ void PauseCommand::execute(MyWebServerSession* session,
 }
 
 
-class BusWebObserver : public IObserver {  // <BusData*> for the template
+class BusWebObserver : public IObserver<BusData*> {  // <BusData*> for the template
  public:
     // This explicit tag is removed too
-    explicit BusWebObserver(MyWebServerSession* session) : session(session) {}
+    BusWebObserver(MyWebServerSession* session) : session(session) {}
 
     // This normally called update, but we call it Notify as per the lab writeup
     void Notify(BusData* info) {
@@ -181,6 +181,41 @@ void AddBusListenerCommand::execute(MyWebServerSession* session,
     std::string id = command.get<picojson::object>()["id"].get<std::string>();
     std::cout << id << std::endl;
     mySim->AddBusListener(&id, new BusWebObserver(session));
+}
+
+class StopWebObserver : public IObserver<StopData*> {
+ public:
+    // This explicit tag is removed too
+    StopWebObserver(MyWebServerSession* session) : session(session) {}
+
+    // This normally called update, but we call it Notify as per the lab writeup
+    void Notify(StopData* info) {
+        picojson::object data;
+        data["command"] = picojson::value("observeStop");
+        std::stringstream ss;
+        ss << "Stop " << info->id << "\n";
+        ss << "-----------------------------\n";
+        ss << "  * Position: (" << info->position.x << ","
+           << info->position.y << ")\n";
+        ss << "  * Passengers: " << info->num_people << "\n";
+        data["text"] = picojson::value(ss.str());
+        picojson::value ret(data);
+        session->sendJSON(ret);
+    }
+ private:
+    MyWebServerSession* session;
+};
+
+
+AddStopListenerCommand::AddStopListenerCommand(VisualizationSimulator* sim)
+  : mySim(sim) {}
+void AddStopListenerCommand::execute(MyWebServerSession* session,
+  picojson::value& command, MyWebServerSessionState* state) {
+    mySim->ClearStopListeners();
+    std::cout << "starting AddStopListenerCommand::execute" << std::endl;
+    std::string id = command.get<picojson::object>()["id"].get<std::string>();
+    std::cout << id << std::endl;
+    mySim->AddStopListener(&id, new StopWebObserver(session));
 }
 
 InitRoutesCommand::InitRoutesCommand(ConfigManager* configManager)
