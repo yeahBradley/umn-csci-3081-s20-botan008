@@ -11,23 +11,23 @@ VisualizationSimulator::VisualizationSimulator(WebInterface* webI,
 
 VisualizationSimulator::~VisualizationSimulator() {}
 
-void VisualizationSimulator::ClearListeners() {
+void VisualizationSimulator::ClearBusListeners() {
     for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
         std::cout << "                " << std::endl;
         std::cout << "                " << std::endl;
         std::cout << "                " << std::endl;
-        std::cout << "                INSIDE VizualizationSimulator::ClearListeners" << std::endl;
+        std::cout << "                INSIDE VizualizationSimulator::ClearBusListeners" << std::endl;
         busses_[i]->ClearObservers();
     }
 }
 
-void VisualizationSimulator::AddListener(std::string* id, IObserver* observer) {
+void VisualizationSimulator::AddBusListener(std::string* id, IObserver* observer) {
     for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
         if (busses_[i]->GetName() == *id) {
             std::cout << "                " << std::endl;
             std::cout << "                " << std::endl;
             std::cout << "                " << std::endl;
-            std::cout << "                INSIDE VizualizationSimulator::AddListener" << std::endl;
+            std::cout << "                INSIDE VizualizationSimulator::AddBusListener" << std::endl;
             std::cout << "                busses_.size() is : " << busses_.size() << std::endl;
             busses_[i]->RegisterObserver(observer);
         }

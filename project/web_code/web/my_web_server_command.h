@@ -70,9 +70,9 @@ class PauseCommand : public MyWebServerCommand {
   VisualizationSimulator* mySim;
 };
 
-class AddListenerCommand: public MyWebServerCommand {
+class AddBusListenerCommand: public MyWebServerCommand {
  public:
-  explicit AddListenerCommand(VisualizationSimulator* sim);
+  explicit AddBusListenerCommand(VisualizationSimulator* sim);
   void execute(MyWebServerSession* session, picojson::value& command,
     MyWebServerSessionState* state) override;
  private:
