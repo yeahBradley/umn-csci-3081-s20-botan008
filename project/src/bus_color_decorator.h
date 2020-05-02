@@ -34,35 +34,35 @@ class BusColorDecorator : public IBusDecorator {
     /**
      * @brief SetColor: The decorator uses this method to change the color of its base bus
      */
-    void SetColor() {
-        BusData currentBusData = wrapped_bus_->GetBusData();
-        if (wrapped_bus_->IsOutgoingRouteComplete()) {
-            currentBusData.color.red = 212;
-            currentBusData.color.green = 175;
-            currentBusData.color.blue = 55;
-            wrapped_bus_->SetBusData(currentBusData);
-        } else {
-            currentBusData.color.red = 178;
-            currentBusData.color.green = 34;
-            currentBusData.color.blue = 34;
-            wrapped_bus_->SetBusData(currentBusData);
-        } 
-    }
+    void SetColor();
+    // {
+    //     BusData currentBusData = wrapped_bus_->GetBusData();
+    //     if (wrapped_bus_->IsOutgoingRouteComplete()) {
+    //         currentBusData.color.red = 212;
+    //         currentBusData.color.green = 175;
+    //         currentBusData.color.blue = 55;
+    //         wrapped_bus_->SetBusData(currentBusData);
+    //     } else {
+    //         currentBusData.color.red = 178;
+    //         currentBusData.color.green = 34;
+    //         currentBusData.color.blue = 34;
+    //         wrapped_bus_->SetBusData(currentBusData);
+    //     } 
+    // }
     /**
      * @brief SetBusData: This, along with the preexisting GetBusData is what allows the BusColorDecorator to change the color.
      */
-    void SetBusData(BusData newBusData) {
-        wrapped_bus_->SetBusData(newBusData);
-    }
+    void SetBusData(BusData newBusData) {wrapped_bus_->SetBusData(newBusData);}
     bool Move() {return wrapped_bus_->Move();}
     /**
      * @brief Update: First this calls SetColor to perform the logic of changing the busses color. Then it calls the Update method of the base bus.
      * 
      */
-    void Update() {
-        this->SetColor();
-        wrapped_bus_->Update();
-    }
+    void Update();
+    // {
+    //     this->SetColor();
+    //     wrapped_bus_->Update();
+    // }
     void Report(std::ostream& ostr) {wrapped_bus_->Report(ostr);}
     void UpdateBusData() {wrapped_bus_->UpdateBusData();}
     BusData GetBusData() const {return wrapped_bus_->GetBusData();}
