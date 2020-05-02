@@ -17,6 +17,11 @@
 #include "src/passenger_unloader.h"
 #include "src/route.h"
 #include "src/stop.h"
+
+class PassengerUnloader;
+class PassengerLoader;
+class Route;
+class Stop;
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
