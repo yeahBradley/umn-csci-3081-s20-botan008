@@ -147,18 +147,15 @@ void PauseCommand::execute(MyWebServerSession* session,
 }
 
 
-class BusWebObserver : public IObserver {
+class BusWebObserver : public IObserver {  // <BusData*> for the template
  public:
+    // This explicit tag is removed too
     explicit BusWebObserver(MyWebServerSession* session) : session(session) {}
 
     // This normally called update, but we call it Notify as per the lab writeup
     void Notify(BusData* info) {
-        std::cout << "                " << std::endl;
-        std::cout << "                " << std::endl;
-        std::cout << "                " << std::endl;
-        std::cout << "                INSIDE BusWebObserver::Notify" << std::endl;
         picojson::object data;
-        data["command"] = picojson::value("observe");
+        data["command"] = picojson::value("observeBus");
         std::stringstream ss;
         ss << "Bus " << info->id << "\n";
         ss << "-----------------------------\n";
@@ -175,15 +172,15 @@ class BusWebObserver : public IObserver {
 };
 
 
-AddListenerCommand::AddListenerCommand(VisualizationSimulator* sim)
+AddBusListenerCommand::AddBusListenerCommand(VisualizationSimulator* sim)
   : mySim(sim) {}
-void AddListenerCommand::execute(MyWebServerSession* session,
+void AddBusListenerCommand::execute(MyWebServerSession* session,
   picojson::value& command, MyWebServerSessionState* state) {
-    mySim->ClearListeners();
-    std::cout << "starting AddListenerCommand::execute" << std::endl;
+    mySim->ClearBusListeners();
+    std::cout << "starting AddBusListenerCommand::execute" << std::endl;
     std::string id = command.get<picojson::object>()["id"].get<std::string>();
     std::cout << id << std::endl;
-    mySim->AddListener(&id, new BusWebObserver(session));
+    mySim->AddBusListener(&id, new BusWebObserver(session));
 }
 
 InitRoutesCommand::InitRoutesCommand(ConfigManager* configManager)

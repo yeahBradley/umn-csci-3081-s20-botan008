@@ -27,7 +27,7 @@ class VisualizationSimulator {
          * @brief This method works in tandem with the back end observer pattern to clear registered busses
          *
          */
-        void ClearListeners();
+        void ClearBusListeners();
         /**
          * @brief This method works in tandem with the back end observer pattern to register the selected bus
          *
@@ -35,7 +35,7 @@ class VisualizationSimulator {
          * @param[in] IObserver* observer: pointer to the observer that will be registered with the subject
          *
          */
-        void AddListener(std::string* id, IObserver* observer);
+        void AddBusListener(std::string* id, IObserver* observer);
         /**
          * @brief A functioning pause button was added to the browser display
          *
