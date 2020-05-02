@@ -19,13 +19,13 @@
  */
 class BusColorDecorator : public IBusDecorator {
  protected:
-    IBus *wrapped_bus_;
+    IBus* wrapped_bus_;
 
  public:
     /**
      * @brief BusColorDecorator : The constructor for this decorator class only needs to store the base class object it was given.
      * 
-     * @param[in] Bus* baseBus : pointer to the base bus object that will be decorated by this class
+     * @param[in] IBus* baseBus : pointer to the base bus object that will be decorated by this class
      */
     explicit BusColorDecorator(IBus* baseBus) : wrapped_bus_(baseBus) {}
     bool IsTripComplete() {return wrapped_bus_->IsTripComplete();}
@@ -34,7 +34,7 @@ class BusColorDecorator : public IBusDecorator {
     bool IsOutgoingRouteComplete() {
         return wrapped_bus_->IsOutgoingRouteComplete();}
     /**
-     * @brief SetColor: The decorator uses this method to change the color of its base bus
+     * @brief SetColor: The decorator uses this method to change the color of its wrapped_bus_
      */
     void SetColor() {
         BusData currentBusData = wrapped_bus_->GetBusData();

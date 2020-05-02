@@ -20,6 +20,10 @@
 /*******************************************************************************
  * Class Definitions
  ******************************************************************************/
+/**
+ * @brief FileWriter: is a singleton pattern class that supports logging data to a one of two files
+ *
+ */
 class FileWriter {
     static FileWriter* file_writer_;
     std::ofstream bus_data_log_;

@@ -25,7 +25,7 @@ class BusIntensityDecorator : public IBusDecorator {
     /**
      * @brief BusIntensityDecorator : The constructor for this decorator class only needs to store the base class object it was given.
      * 
-     * @param[in] Bus* baseBus : pointer to the base bus object that will be decorated by this class
+     * @param[in] IBus* baseBus : pointer to the base bus object that will be decorated by this class
      */
     explicit BusIntensityDecorator(IBus* baseBus) : wrapped_bus_(baseBus) {}
     bool IsTripComplete() {return wrapped_bus_->IsTripComplete();}
@@ -34,7 +34,7 @@ class BusIntensityDecorator : public IBusDecorator {
     bool IsOutgoingRouteComplete() {
         return wrapped_bus_->IsOutgoingRouteComplete();}
     /**
-     * @brief SetIntensity: The decorator uses this method to change the alpha Intensity of its base bus
+     * @brief SetIntensity: The decorator uses this method to change the alpha Intensity of its wrapped_bus_
      */
     void SetIntensity() {
         BusData BusData = wrapped_bus_->GetBusData();
@@ -67,7 +67,6 @@ class BusIntensityDecorator : public IBusDecorator {
             default:
                 alpha = 255;
         }
-        // std::cout << "         " << alpha << std::endl;
         BusData.color.alpha = alpha;
         wrapped_bus_->SetBusData(BusData);
     }

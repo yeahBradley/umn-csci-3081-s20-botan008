@@ -13,7 +13,10 @@
 #include "src/stop.h"
 #include "src/route.h"
 #include "src/passenger_generator.h"
-
+/**
+ * @brief Absract class for supporting the regression test simulator classes
+ *
+ */
 class rSimulator {
  public:
   virtual bool Start() = 0;

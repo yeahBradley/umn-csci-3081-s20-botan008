@@ -9,7 +9,10 @@
 #include <vector>
 #include <string>
 #include "src/r_simulator.h"
-
+/**
+ * @brief This class supports the regression test that was provided in lab
+ *
+ */
 class rLocalSimulator : public rSimulator {
  public:
   bool Start() override;

@@ -16,7 +16,7 @@
  ******************************************************************************/
 
 /**
- * @brief Position: 
+ * @brief Position: holds latitude and longitude position data as x, y coordinates
  */
 struct Position {
     Position(int x, int y): x(x), y(y) {}
@@ -25,7 +25,7 @@ struct Position {
     float y;
 };
 /**
- * @brief Color: 
+ * @brief Color: Holds relevant color data: red, green, blue, alpha
  */
 struct Color {
     explicit Color(int r = 0, int g = 0, int b = 0, int a = 255):
@@ -36,7 +36,7 @@ struct Color {
     int alpha;
 };
 /**
- * @brief BusData: 
+ * @brief BusData: Holds relevant bus data: id, position, num_passengers, capacity, and color
  */
 struct BusData {
     BusData(std::string id, Color color, Position pos, int n_pass, int cap):
@@ -51,7 +51,7 @@ struct BusData {
     Color color;
 };
 /**
- * @brief StopData:
+ * @brief StopData: Holds relevant stop data: id, position, num_people
  */
 struct StopData {
     StopData(std::string id, Position pos , int n_peeps):
@@ -62,7 +62,7 @@ struct StopData {
     int num_people;
 };
 /**
- * @brief RouteData: 
+ * @brief RouteData: Holds relevant route data: id, and a vector container for stops
  */
 struct RouteData {
     explicit RouteData(std::string id) :
