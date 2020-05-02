@@ -9,6 +9,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
 #include "src/i_bus_decorator.h"
 /*******************************************************************************
  * Class Definitions
@@ -26,26 +27,21 @@ class BusIntensityDecorator : public IBusDecorator {
      * 
      * @param[in] Bus* baseBus : pointer to the base bus object that will be decorated by this class
      */
-    BusIntensityDecorator(IBus* baseBus) : wrapped_bus_(baseBus) {}
-    
+    explicit BusIntensityDecorator(IBus* baseBus) : wrapped_bus_(baseBus) {}
     bool IsTripComplete() {return wrapped_bus_->IsTripComplete();}
-    bool LoadPassenger(Passenger* pass) {return wrapped_bus_->LoadPassenger(pass);}
-    bool IsOutgoingRouteComplete() {return wrapped_bus_->IsOutgoingRouteComplete();}
+    bool LoadPassenger(Passenger* pass) {
+        return wrapped_bus_->LoadPassenger(pass);}
+    bool IsOutgoingRouteComplete() {
+        return wrapped_bus_->IsOutgoingRouteComplete();}
     /**
      * @brief SetIntensity: The decorator uses this method to change the alpha Intensity of its base bus
      */
     void SetIntensity() {
         BusData BusData = wrapped_bus_->GetBusData();
         int alpha;
-        // large bus: 75 - 255; each passenger is worth 2 points of intensity
-        // regular bus: 75 - 255; each passenger is worth 3
-        // small bus: 75 - 255; each passenger is worth 6
-
-        // std::cout << "*********" << std::endl;
-        // std::cout << "*********" << std::endl;
-        // std::cout << "*********" << std::endl;
-        // std::cout << "         " << BusData.capacity << std::endl;
-        // std::cout << "         " << BusData.num_passengers << std::endl;
+        // To make the changes in alpha more noticable the alpha channel starts
+        // at 160 and increases by 15 for each passenger up to 6 passengers.
+        // With 7 or more passengers the alpha is locked at 255.
         switch (BusData.capacity) {
             case 30:
                 if (BusData.num_passengers < 7) {
@@ -94,7 +90,8 @@ class BusIntensityDecorator : public IBusDecorator {
     Stop * GetNextStop() const {return wrapped_bus_->GetNextStop();}
     size_t GetNumPassengers() const {return wrapped_bus_->GetNumPassengers();}
     int GetCapacity() const {return wrapped_bus_->GetCapacity();}
-    void RegisterObserver(IObserver<BusData*> * observer) {wrapped_bus_->RegisterObserver(observer);}
+    void RegisterObserver(IObserver<BusData*> * observer) {
+        wrapped_bus_->RegisterObserver(observer);}
     void ClearObservers() {wrapped_bus_->ClearObservers();}
 
  private:
