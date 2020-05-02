@@ -23,7 +23,7 @@ class IObserver {
 /**
  * @brief Notify
  *
- * @param[in] BusData info: BusData struct for one bus that is currently being observed
+ * @param[in] T info: A struct (either BusData or StopData) for one bus or stop that is currently being observed
  *
  */
   virtual void Notify(T info) = 0;

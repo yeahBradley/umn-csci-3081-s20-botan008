@@ -9,6 +9,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <string>
 #include "src/i_bus_decorator.h"
 /*******************************************************************************
  * Class Definitions
@@ -18,21 +19,22 @@
  */
 class BusColorDecorator : public IBusDecorator {
  protected:
-    IBus *wrapped_bus_;
+    IBus* wrapped_bus_;
 
  public:
     /**
      * @brief BusColorDecorator : The constructor for this decorator class only needs to store the base class object it was given.
      * 
-     * @param[in] Bus* baseBus : pointer to the base bus object that will be decorated by this class
+     * @param[in] IBus* baseBus : pointer to the base bus object that will be decorated by this class
      */
-    BusColorDecorator(IBus* baseBus) : wrapped_bus_(baseBus) {}
-    
+    explicit BusColorDecorator(IBus* baseBus) : wrapped_bus_(baseBus) {}
     bool IsTripComplete() {return wrapped_bus_->IsTripComplete();}
-    bool LoadPassenger(Passenger* pass) {return wrapped_bus_->LoadPassenger(pass);}
-    bool IsOutgoingRouteComplete() {return wrapped_bus_->IsOutgoingRouteComplete();}
+    bool LoadPassenger(Passenger* pass) {
+        return wrapped_bus_->LoadPassenger(pass);}
+    bool IsOutgoingRouteComplete() {
+        return wrapped_bus_->IsOutgoingRouteComplete();}
     /**
-     * @brief SetColor: The decorator uses this method to change the color of its base bus
+     * @brief SetColor: The decorator uses this method to change the color of its wrapped_bus_
      */
     void SetColor() {
         BusData currentBusData = wrapped_bus_->GetBusData();
@@ -46,7 +48,7 @@ class BusColorDecorator : public IBusDecorator {
             currentBusData.color.green = 34;
             currentBusData.color.blue = 34;
             wrapped_bus_->SetBusData(currentBusData);
-        } 
+        }
     }
     /**
      * @brief SetBusData: This, along with the preexisting GetBusData is what allows the BusColorDecorator to change the color.
@@ -70,7 +72,8 @@ class BusColorDecorator : public IBusDecorator {
     Stop * GetNextStop() const {return wrapped_bus_->GetNextStop();}
     size_t GetNumPassengers() const {return wrapped_bus_->GetNumPassengers();}
     int GetCapacity() const {return wrapped_bus_->GetCapacity();}
-    void RegisterObserver(IObserver<BusData*> * observer) {wrapped_bus_->RegisterObserver(observer);}
+    void RegisterObserver(IObserver<BusData*> * observer) {
+        wrapped_bus_->RegisterObserver(observer);}
     void ClearObservers() {wrapped_bus_->ClearObservers();}
 
  private:

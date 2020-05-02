@@ -42,7 +42,7 @@ class VisualizationSimulator {
          */
         void ClearStopListeners();
         /**
-         * @brief This method works in tandem with the back end observer pattern to register the selected stop
+         * @brief AddStopListener: This method works in tandem with the back end observer pattern to register the selected stop
          *
          * @param[in] string* id: pointer to the name of the bus that will registered
          * @param[in] IObserver<StopData*>* observer: pointer to the observer that will be registered with the subject. Note that IObserver is a template class
@@ -50,13 +50,13 @@ class VisualizationSimulator {
          */
         void AddStopListener(std::string* id, IObserver<StopData*>* observer);
         /**
-         * @brief A functioning pause button was added to the browser display
+         * @brief Pause: A functioning pause button was added to the browser display
          *
          */
         void Pause();
         void Start(const std::vector<int>&, const int&);
         /**
-         * @brief Update tics every element of the simulation forward in time
+         * @brief Update: Tics every element of the simulation forward in time
          */
         void Update();
 

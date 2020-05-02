@@ -80,10 +80,14 @@ void GetBussesCommand::execute(MyWebServerSession* session,
         s["position"] = picojson::value(pStruct);
 
         picojson::object cStruct;
-        cStruct["red"] = picojson::value(static_cast<double>(busses[i].color.red));
-        cStruct["green"] = picojson::value(static_cast<double>(busses[i].color.green));
-        cStruct["blue"] = picojson::value(static_cast<double>(busses[i].color.blue));
-        cStruct["alpha"] = picojson::value(static_cast<double>(busses[i].color.alpha));
+        cStruct["red"] = picojson::value(static_cast<double>(
+          busses[i].color.red));
+        cStruct["green"] = picojson::value(static_cast<double>(
+          busses[i].color.green));
+        cStruct["blue"] = picojson::value(static_cast<double>(
+          busses[i].color.blue));
+        cStruct["alpha"] = picojson::value(static_cast<double>(
+          busses[i].color.alpha));
         s["color"] = picojson::value(cStruct);
 
         bussesArray.push_back(picojson::value(s));
@@ -147,10 +151,9 @@ void PauseCommand::execute(MyWebServerSession* session,
 }
 
 
-class BusWebObserver : public IObserver<BusData*> {  // <BusData*> for the template
+class BusWebObserver : public IObserver<BusData*> {
  public:
-    // This explicit tag is removed too
-    BusWebObserver(MyWebServerSession* session) : session(session) {}
+    explicit BusWebObserver(MyWebServerSession* session) : session(session) {}
 
     // This normally called update, but we call it Notify as per the lab writeup
     void Notify(BusData* info) {
@@ -185,8 +188,7 @@ void AddBusListenerCommand::execute(MyWebServerSession* session,
 
 class StopWebObserver : public IObserver<StopData*> {
  public:
-    // This explicit tag is removed too
-    StopWebObserver(MyWebServerSession* session) : session(session) {}
+    explicit StopWebObserver(MyWebServerSession* session) : session(session) {}
 
     // This normally called update, but we call it Notify as per the lab writeup
     void Notify(StopData* info) {

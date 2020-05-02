@@ -22,9 +22,9 @@ template <typename T>
 class IObservable {
  public:
 /**
- * @brief RegisterObserver takes in an observer pointer to be rejistered by the subject
+ * @brief RegisterObserver takes in an observer pointer to be registered by the subject
  *
- * @param[in] IObserver* observer: Pointer to an Observer object that is taken in to be registered
+ * @param[in] IObserver<T>* observer: Pointer to an Observer object that is taken in to be registered
  *
  */
   virtual void RegisterObserver(IObserver<T> * observer);
@@ -34,12 +34,12 @@ class IObservable {
  */
   virtual void ClearObservers();
 /**
- * @brief NotifyObservers broadcasts BusData to the registered observers
+ * @brief NotifyObservers broadcasts a struct (either BusData or StopData) to the registered observers
  *
- * @param[in] BusData busData: Pointer to a BusData struct for one bus that contains the data the observers want
+ * @param[in] T info: Pointer to a struct (either BusData or StopData) for one bus or one stop that contains the data the observers want
  *
  */
-  virtual void NotifyObservers(T busData);
+  virtual void NotifyObservers(T info);
 
  private:
   std::vector<IObserver<T> *> observer_;
