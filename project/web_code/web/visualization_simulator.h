@@ -13,6 +13,7 @@
 #include "src/i_bus_decorator.h"
 #include "src/bus_color_decorator.h"
 #include "src/bus_intensity_decorator.h"
+#include "src/i_observer.h"
 
 class Route;
 class Bus;
@@ -26,7 +27,12 @@ class VisualizationSimulator {
          * @brief This method works in tandem with the back end observer pattern to clear registered busses
          *
          */
-        void ClearListeners();
+        void ClearBusListeners();
+        /**
+         * @brief This method works in tandem with the back end observer pattern to clear registered busses
+         *
+         */
+        void ClearStopListeners();
         /**
          * @brief This method works in tandem with the back end observer pattern to register the selected bus
          *
@@ -34,7 +40,15 @@ class VisualizationSimulator {
          * @param[in] IObserver* observer: pointer to the observer that will be registered with the subject
          *
          */
-        void AddListener(std::string* id, IObserver* observer);
+        void AddBusListener(std::string* id, IObserver<BusData*> observer);
+        /**
+         * @brief This method works in tandem with the back end observer pattern to register the selected bus
+         *
+         * @param[in] string* id: pointer to the name of the bus that will registered
+         * @param[in] IObserver* observer: pointer to the observer that will be registered with the subject
+         *
+         */
+        void AddStopListener(std::string* id, IObserver<StopData*> observer);
         /**
          * @brief A functioning pause button was added to the browser display
          *

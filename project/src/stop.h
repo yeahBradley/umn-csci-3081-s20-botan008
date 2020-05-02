@@ -8,13 +8,14 @@
 
 #include <list>
 #include <iostream>
+#include <string>
 
 #include "src/bus.h"
 #include "src/passenger.h"
 
 class Bus;
 
-class Stop {
+class Stop : public IObservable<StopData*>{
  public:
   explicit Stop(int, double = 44.973723, double = -93.235365);
   int LoadPassengers(Bus *);  // Removing passengers from stop
@@ -34,7 +35,9 @@ class Stop {
   int id_;
   std::list<Passenger *> passengers_;  // considered array, vector, queue, list
   double longitude_;
-  double latitude_;  // are we using long/lat coords?
+  double latitude_;  
+  StopData stop_data_;
+  // are we using long/lat coords?
   // derived information - not needed depending on passengers_
   // data structure implementation?
   // int passengers_present_;

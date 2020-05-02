@@ -6,19 +6,25 @@
 
 #include "src/i_observable.h"
 
-void IObservable::RegisterObserver(IObserver * observer) {
+
+template<typename T1>// T1 is for data structs type, T2 is for IObservable type
+void IObservable<T1>::RegisterObserver(IObservable<T1> observer)    //  (IObserver * observer)
+{
   observer_.push_back(observer);
 }
 
-void IObservable::ClearObservers() {
+template<typename T1>
+void IObservable<T1>::ClearObservers() {
   observer_.clear();
 }
 
-void IObservable::NotifyObservers(BusData * info) {
-  for (std::vector<IObserver *>::const_iterator iter = observer_.begin();
+template<typename T1>
+void IObservable<T1>::NotifyObservers(T1 data)  // (BusData * info)
+{
+  for (typename std::vector<IObservable<T1> >::const_iterator iter = observer_.begin();
   iter != observer_.end(); ++iter) {
     if (*iter != 0) {
-      (*iter)->Notify(info);
+      (*iter)->Notify(data);
     }
   }
 }

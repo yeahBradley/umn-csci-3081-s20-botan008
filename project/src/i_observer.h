@@ -14,18 +14,19 @@
  * Class Definitions
  ******************************************************************************/
 /**
- * @brief IObserver is a pure abstract class intended to observe one bus
+ * @brief IObserver: A template class that is intended to use busdata structs and stopdata structs.
  *
  */
+template<typename T1>
 class IObserver {
  public:
 /**
  * @brief Notify
  *
- * @param[in] BusData info: BusData struct for one bus that is currently being observed
+ * @param[in] theType* info: theType could be a busdata struct or stopdata struct
  *
  */
-  virtual void Notify(BusData * info) = 0;
+  virtual void Notify(T1* data) = 0;
 };
 
 #endif  // SRC_I_OBSERVER_H_

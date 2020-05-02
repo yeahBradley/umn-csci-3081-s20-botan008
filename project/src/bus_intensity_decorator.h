@@ -28,7 +28,9 @@ class BusIntensityDecorator : public IBusDecorator {
      * @param[in] Bus* baseBus : pointer to the base bus object that will be decorated by this class
      */
     BusIntensityDecorator(IBus* baseBus) : wrapped_bus_(baseBus) {}
-    
+    // void RegisterObserver(IObserver * observer) {wrapped_bus_->RegisterObserver(observer);}
+    // void ClearObservers() {wrapped_bus_->ClearObservers();}
+    // void NotifyObservers(BusData* busData) {wrapped_bus_->NotifyObservers(busData);}
     bool IsTripComplete() {return wrapped_bus_->IsTripComplete();}
     bool LoadPassenger(Passenger* pass) {return wrapped_bus_->LoadPassenger(pass);}
     bool IsOutgoingRouteComplete() {return wrapped_bus_->IsOutgoingRouteComplete();}

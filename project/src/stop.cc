@@ -48,6 +48,13 @@ void Stop::Update() {
                                     it != passengers_.end(); it++) {
     (*it)->Update();
   }
+  std::string str = std::to_string(GetId());
+  Position pos = {GetLatitude(), GetLongitude()};
+  int n_peeps = passengers_.size();
+  
+  StopData stopData {str, pos, n_peeps};
+  stop_data_ = stopData;
+  NotifyObservers(&stop_data_);
 }
 
 int Stop::GetId() const {

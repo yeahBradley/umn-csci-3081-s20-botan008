@@ -14,16 +14,31 @@ VisualizationSimulator::VisualizationSimulator(WebInterface* webI,
 
 VisualizationSimulator::~VisualizationSimulator() {}
 
-void VisualizationSimulator::ClearListeners() {
+void VisualizationSimulator::ClearBusListeners() {
     for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
         busses_[i]->ClearObservers();
     }
 }
 
-void VisualizationSimulator::AddListener(std::string* id, IObserver* observer) {
+void VisualizationSimulator::ClearStopListeners() {
+    // TODO:
+}
+
+void VisualizationSimulator::AddBusListener(std::string* id, IObserver<BusData*> observer) {
     for (int i = static_cast<int>(busses_.size()) - 1; i >= 0; i--) {
         if (busses_[i]->GetName() == *id) {
             busses_[i]->RegisterObserver(observer);
+        }
+    }
+}
+
+void VisualizationSimulator::AddStopListener(std::string* id, IObserver<StopData*> observer) {
+    for (int i = static_cast<int>(prototypeRoutes_.size()) - 1; i >= 0; i--) {
+        std::list<Stop *> stops = prototypes_[i]->GetStops();
+        for (int i = static_cast<int>(stops.size()) - 1; i >= 0; i--) {
+            if (std::to_string(stops[i]->GetId()) == *id) {
+                stops[i]->RegisterObserver(observer);
+            }
         }
     }
 }
