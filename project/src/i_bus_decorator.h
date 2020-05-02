@@ -16,7 +16,7 @@
  * Struct Definitions
  ******************************************************************************/
 /**
- * @brief IBusDecorator: This is an abstract interface for the bus decorator pattern. All public methods from IBus are included for pass-through.
+ * @brief IBusDecorator: This is an abstract interface for the bus decorator pattern. All public methods from IBus are included for pass-through. Additionally, RegisterObserver and ClearObservers are included for the Observer pattern
  * 
  */
 class IBusDecorator : public IBus {
